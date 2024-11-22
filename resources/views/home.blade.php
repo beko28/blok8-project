@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
-    <?php include '/Users/bekir/Herd/voetbalapp/resources/bovenenbeneden/header.php'; ?>
+    @include('bovenenbeneden.header')
 
     <div class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-16">
         <div class="container mx-auto px-6 text-center">
@@ -90,6 +90,6 @@
     </div>
 
 
-    <?php include '/Users/bekir/Herd/voetbalapp/resources/bovenenbeneden/footer.php'; ?>
+    @include('bovenenbeneden.footer')
 </body>
 </html>
