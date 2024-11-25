@@ -1,3 +1,5 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="/images/logo.png" type="image/png">
 <header class="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 text-white py-8 shadow-md">
     <div class="container mx-auto flex items-center justify-between px-6">
         <div class="flex items-center space-x-4">
