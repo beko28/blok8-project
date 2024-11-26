@@ -7,19 +7,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="/images/logo.png" type="image/png">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-<script>
-    AOS.init();
-</script>
-
+    
 </head>
 <body class="bg-gray-100 text-gray-800">
     @include('bovenenbeneden.header')
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script>
+    AOS.init();
+    </script>
 
     <div class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
         <img src="{{ asset('images/footballer-removebg-preview.png') }}" style="position: absolute; height: 300px; right:100px; top: 130px;">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-6 text-center" data-aos="fade-up">
             <h1 class="text-5xl font-bold mb-6">Welkom bij de Voetbal App</h1>
             <p class="text-xl mb-8">Beheer spelers, poules, tags en nieuws eenvoudig in één applicatie!</p>
             <a href="{{ route('spelers.index') }}" class="bg-yellow-400 text-blue-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="container mx-auto p-8">
-        <div class="bg-white shadow-md rounded-lg p-8">
+        <div class="bg-white shadow-md rounded-lg p-8" data-aos="fade-up">
             <h2 class="text-3xl font-semibold mb-6 text-center">Over de Voetbal App</h2>
             <p class="text-gray-600 mb-6 text-lg leading-relaxed">
                 Deze applicatie helpt je om al je voetbalactiviteiten te beheren. Of je nu spelersinformatie wilt bijhouden, wedstrijden wilt organiseren, of op de hoogte wilt blijven van het laatste nieuws, de Voetbal App biedt alles wat je nodig hebt.
@@ -44,7 +44,7 @@
     </div>
 
     <div class="bg-gray-200 py-16">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <h2 class="text-4xl font-bold text-center mb-12">Waarom kiezen voor de Voetbal App?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="bg-white shadow-lg rounded-lg p-8 text-center hover:shadow-2xl transition duration-300">
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="flex justify-between space-x-8">
+    <div class="flex justify-between space-x-8" data-aos="fade-up">
         <div class="text-center" style="margin-left: 100px;">
             <h2 class="text-5xl font-bold text-blue-600">150+</h2>
             <p class="text-gray-600">Teams</p>
@@ -82,7 +82,7 @@
     </div>
 
 
-    <div class="bg-blue-600 text-white py-20">
+    <div class="bg-blue-600 text-white py-20" data-aos="fade-up">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold mb-6">Maak je voetbalbeheer eenvoudig en effectief</h2>
             <p class="text-lg mb-8">Start nu met de Voetbal App en ontdek hoe het je tijd en moeite bespaart.</p>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="bg-gray-100 py-16">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <h2 class="text-4xl font-bold text-center mb-12">Wat zeggen onze gebruikers?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="bg-white shadow-lg rounded-lg p-8 text-center hover:shadow-2xl transition duration-300">
