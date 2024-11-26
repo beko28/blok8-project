@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+@include('bovenenbeneden.header')
 <div class="container mx-auto p-8">
     <h1 class="text-2xl font-bold mb-6">Overzicht van Spelers</h1>
 
@@ -35,4 +33,4 @@
         </table>
     @endif
 </div>
-@endsection
+@include('bovenenbeneden.footer')

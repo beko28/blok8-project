@@ -67,16 +67,16 @@
     </div>
 
     <div class="flex justify-between space-x-8" data-aos="fade-up">
-        <div class="text-center" style="margin-left: 100px;">
-            <h2 class="text-5xl font-bold text-blue-600">150+</h2>
+        <div class="text-center" style="margin-left: 150px;">
+            <h2 class="text-4xl font-bold text-blue-600">150+</h2>
             <p class="text-gray-600">Teams</p>
         </div>
         <div class="text-center">
-            <h2 class="text-5xl font-bold text-blue-600">5000+</h2>
+            <h2 class="text-4xl font-bold text-blue-600">5000+</h2>
             <p class="text-gray-600">Spelers</p>
         </div>
-        <div class="text-center" style="margin-right: 100px;">
-            <h2 class="text-5xl font-bold text-blue-600">200+</h2>
+        <div class="text-center" style="margin-right: 150px;">
+            <h2 class="text-4xl font-bold text-blue-600">200+</h2>
             <p class="text-gray-600">Wedstrijden</p>
         </div>
     </div>

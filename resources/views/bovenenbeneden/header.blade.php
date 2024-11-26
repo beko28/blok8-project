@@ -12,25 +12,35 @@
                 <li><a href="{{ route('spelers.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Spelers</a></li>
                 <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300">Poules</a></li>
                 <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300">Nieuws</a></li>
-                <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300">Contact</a></li>
+                <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Contact</a></li>
             </ul>
         </nav>
 
-        <div class="flex space-x-4">
-    @guest
-        <a href="{{ route('login') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Login</a>
-        <a href="{{ route('register') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Register</a>
-    @endguest
-    @auth
-        <a href="{{ route('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-400 transition duration-300"
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            Logout
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-            @csrf
-        </form>
-    @endauth
-</div>
+        <<div class="flex space-x-4">
+            @guest
+                <a href="{{ route('login') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Login</a>
+                <a href="{{ route('register') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Register</a>
+            @endguest
 
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-400 transition duration-300">
+                        Admin Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('profile.show') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-400 transition duration-300">
+                        Profiel
+                    </a>
+                @endif
+
+                <a href="{{ route('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-400 transition duration-300"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                    @csrf
+                </form>
+            @endauth
+        </div>
     </div>
 </header>
