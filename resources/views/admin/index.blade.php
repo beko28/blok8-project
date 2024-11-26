@@ -1,34 +1,60 @@
 @include('bovenenbeneden.header')
 
-<div class="container">
-    <h1>Gebruikersbeheer</h1>
-    <a href="{{ route('admin.create') }}" class="btn btn-primary mb-3">Nieuwe gebruiker</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Email</th>
-                <th>Rol</th>
-                <th>Acties</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users as $user)
-            <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>
-                <td>
-                    <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-warning">Bewerken</a>
-                    <form action="{{ route('admin.destroy', $user->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')">Verwijderen</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div class="container mx-auto mt-10 px-4">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Gebruikersbeheer</h1>
+
+    <div class="flex justify-between items-center mb-5">
+        <a href="{{ route('admin.create') }}" 
+           class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md shadow-md flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            Nieuwe gebruiker
+        </a>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="table-auto w-full border border-gray-300 shadow-md rounded-md">
+            <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="px-4 py-2 text-left">Naam</th>
+                    <th class="px-4 py-2 text-left">Email</th>
+                    <th class="px-4 py-2 text-left">Rol</th>
+                    <th class="px-4 py-2 text-center">Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($users as $user)
+                <tr class="border-t border-gray-300 hover:bg-gray-50">
+                    <td class="px-4 py-2">{{ $user->name }}</td>
+                    <td class="px-4 py-2">{{ $user->email }}</td>
+                    <td class="px-4 py-2 capitalize">{{ $user->role }}</td>
+                    <td class="px-4 py-2 text-center space-x-2">
+                        <a href="{{ route('admin.edit', $user->id) }}" 
+                           class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md shadow-md flex items-center justify-center inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487a2.25 2.25 0 113.181 3.181L7.5 19.31l-4.5.5.5-4.5L16.862 3.487z" />
+                            </svg>
+                            Bewerken
+                        </a>
+                        <form action="{{ route('admin.destroy', $user->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" 
+                                    onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" 
+                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12H4.5" />
+                                </svg>
+                                Verwijderen
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+
 @include('bovenenbeneden.footer')

@@ -24,11 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
-Route::group(['middleware' => ['admin']], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-});
-
-Route::middleware(['auth', 'isAdmin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
@@ -37,7 +33,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::delete('/admin/{user}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
 
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('admin');
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+
