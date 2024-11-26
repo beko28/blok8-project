@@ -7,11 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="/images/logo.png" type="image/png">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+<script>
+    AOS.init();
+</script>
+
 </head>
 <body class="bg-gray-100 text-gray-800">
     @include('bovenenbeneden.header')
 
     <div class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+        <img src="{{ asset('images/footballer-removebg-preview.png') }}" style="position: absolute; height: 300px; right:100px; top: 130px;">
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-5xl font-bold mb-6">Welkom bij de Voetbal App</h1>
             <p class="text-xl mb-8">Beheer spelers, poules, tags en nieuws eenvoudig in één applicatie!</p>
@@ -59,13 +66,30 @@
         </div>
     </div>
 
+    <div class="flex justify-between space-x-8">
+        <div class="text-center" style="margin-left: 100px;">
+            <h2 class="text-5xl font-bold text-blue-600">150+</h2>
+            <p class="text-gray-600">Teams</p>
+        </div>
+        <div class="text-center">
+            <h2 class="text-5xl font-bold text-blue-600">5000+</h2>
+            <p class="text-gray-600">Spelers</p>
+        </div>
+        <div class="text-center" style="margin-right: 100px;">
+            <h2 class="text-5xl font-bold text-blue-600">200+</h2>
+            <p class="text-gray-600">Wedstrijden</p>
+        </div>
+    </div>
+
+
     <div class="bg-blue-600 text-white py-20">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold mb-6">Maak je voetbalbeheer eenvoudig en effectief</h2>
             <p class="text-lg mb-8">Start nu met de Voetbal App en ontdek hoe het je tijd en moeite bespaart.</p>
-            <a href="{{ route('spelers.index') }}" class="bg-yellow-400 text-blue-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
-                Begin Nu
+            <a href="{{ route('spelers.index') }}" class="bg-yellow-400 text-blue-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105">
+                Start Nu
             </a>
+
         </div>
     </div>
 
