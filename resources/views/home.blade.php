@@ -14,12 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <script>
-    AOS.init();
-    </script>
+        AOS.init();
+        </script>
 
-    <div class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
-        <img src="{{ asset('images/footballer-removebg-preview.png') }}" style="position: absolute; height: 300px; right:100px; top: 130px;">
-        <div class="container mx-auto px-6 text-center" data-aos="fade-up">
+<div class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+    <img src="{{ asset('images/footballer-removebg-preview.png') }}" style="position: absolute; height: 300px; right:100px; top: 130px;">
+    <div class="container mx-auto px-6 text-center" data-aos="fade-up">
             <h1 class="text-5xl font-bold mb-6">Welkom bij de Voetbal App</h1>
             <p class="text-xl mb-8">Beheer spelers, poules, tags en nieuws eenvoudig in één applicatie!</p>
             <a href="{{ route('spelers.index') }}" class="bg-yellow-400 text-blue-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
@@ -27,7 +27,7 @@
             </a>
         </div>
     </div>
-
+    
     <div class="container mx-auto p-8">
         <div class="bg-white shadow-md rounded-lg p-8" data-aos="fade-up">
             <h2 class="text-3xl font-semibold mb-6 text-center">Over de Voetbal App</h2>
@@ -40,6 +40,20 @@
                 <li>Lees en deel voetbalnieuws met je team.</li>
                 <li>Categoriseer en tag spelers en teams voor snelle toegang.</li>
             </ul>
+        </div>
+    </div>
+    <div class="flex justify-between space-x-8" style="margin-bottom: 20px;" data-aos="fade-up">
+        <div class="text-center" style="margin-left: 150px;">
+            <h2 class="text-4xl font-bold text-blue-600">150+</h2>
+            <p class="text-gray-600">Teams</p>
+        </div>
+        <div class="text-center">
+            <h2 class="text-4xl font-bold text-blue-600">5000+</h2>
+            <p class="text-gray-600">Spelers</p>
+        </div>
+        <div class="text-center" style="margin-right: 150px;">
+            <h2 class="text-4xl font-bold text-blue-600">200+</h2>
+            <p class="text-gray-600">Wedstrijden</p>
         </div>
     </div>
 
@@ -66,20 +80,6 @@
         </div>
     </div>
 
-    <div class="flex justify-between space-x-8" data-aos="fade-up">
-        <div class="text-center" style="margin-left: 150px;">
-            <h2 class="text-4xl font-bold text-blue-600">150+</h2>
-            <p class="text-gray-600">Teams</p>
-        </div>
-        <div class="text-center">
-            <h2 class="text-4xl font-bold text-blue-600">5000+</h2>
-            <p class="text-gray-600">Spelers</p>
-        </div>
-        <div class="text-center" style="margin-right: 150px;">
-            <h2 class="text-4xl font-bold text-blue-600">200+</h2>
-            <p class="text-gray-600">Wedstrijden</p>
-        </div>
-    </div>
 
 
     <div class="bg-blue-600 text-white py-20" data-aos="fade-up">

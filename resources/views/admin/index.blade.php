@@ -29,26 +29,28 @@
                     <td class="px-4 py-2">{{ $user->name }}</td>
                     <td class="px-4 py-2">{{ $user->email }}</td>
                     <td class="px-4 py-2 capitalize">{{ $user->role }}</td>
-                    <td class="px-4 py-2 text-center space-x-2">
-                        <a href="{{ route('admin.edit', $user->id) }}" 
-                           class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md shadow-md flex items-center justify-center inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487a2.25 2.25 0 113.181 3.181L7.5 19.31l-4.5.5.5-4.5L16.862 3.487z" />
-                            </svg>
-                            Bewerken
-                        </a>
-                        <form action="{{ route('admin.destroy', $user->id) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" 
-                                    onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" 
-                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md flex items-center justify-center">
+                    <td class="px-4 py-2 text-center">
+                        <div class="flex justify-center space-x-2">
+                            <a href="{{ route('admin.edit', $user->id) }}" 
+                            class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md shadow-md flex items-center justify-center" style="height: 40px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12H4.5" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487a2.25 2.25 0 113.181 3.181L7.5 19.31l-4.5.5.5-4.5L16.862 3.487z" />
                                 </svg>
-                                Verwijderen
-                            </button>
-                        </form>
+                                Bewerken
+                            </a>
+                            <form action="{{ route('admin.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                        onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" 
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md flex items-center justify-center" style="height: 40px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12H4.5" />
+                                    </svg>
+                                    Verwijderen
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

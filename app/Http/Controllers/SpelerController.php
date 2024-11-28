@@ -34,8 +34,11 @@ class SpelerController extends Controller
         // Validatie van het formulier
         $request->validate([
             'naam' => 'required|string|max:255',
+            'achternaam' => 'required|string|max:255',
             'positie' => 'required|string|max:50',
+            'rugnummer' => 'nullable|integer|min:0',
             'leeftijd' => 'required|integer|min:0',
+            'email' => 'required|string|email|max:255|unique:spelers'
         ]);
 
         // Nieuwe speler aanmaken
@@ -63,6 +66,7 @@ class SpelerController extends Controller
         $request->validate([
             'naam' => 'required|string|max:255',
             'positie' => 'required|string|max:50',
+            'rugnummer' => 'nullable|integer|min:0',
             'leeftijd' => 'required|integer|min:0',
         ]);
 

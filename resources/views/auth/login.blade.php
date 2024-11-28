@@ -40,7 +40,6 @@
                 </div>
             </div>
 
-            <!-- Remember Me -->
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <input id="remember" name="remember" type="checkbox"

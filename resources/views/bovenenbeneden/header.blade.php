@@ -8,18 +8,18 @@
         </div>
         
         <nav class="flex-grow text-center">
-            <ul class="inline-flex space-x-6">
+            <ul class="inline-flex space-x-6" style="margin-right: 100px;">
                 <li><a href="{{ route('spelers.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Spelers</a></li>
-                <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300">Poules</a></li>
+                <li><a href="{{ route('poules.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Poules</a></li>
                 <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300">Nieuws</a></li>
                 <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Contact</a></li>
             </ul>
         </nav>
 
-        <<div class="flex space-x-4">
+        <div class="flex space-x-4">
             @guest
                 <a href="{{ route('login') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Login</a>
-                <a href="{{ route('register') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Register</a>
+                <a href="{{ route('register.step') }}" class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition duration-300">Register</a>
             @endguest
 
             @auth
