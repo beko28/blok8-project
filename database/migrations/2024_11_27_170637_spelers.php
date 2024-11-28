@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('naam')->nullable();
             $table->string('achternaam')->nullable();
             $table->string('email')->unique();
+            $table->string('password');
+            $table->string('role')->default('speler');
             $table->integer('leeftijd')->nullable();
             $table->integer('rugnummer')->nullable();
             $table->string('positie')->nullable();
             $table->timestamps();
         });
-    }
+    }        
 
     /**
      * Reverse the migrations.

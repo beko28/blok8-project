@@ -2,12 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Speler extends Model
+class Speler extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
 
-    protected $fillable = ['naam', 'positie', 'leeftijd'];
+    protected $fillable = [
+        'naam',
+        'achternaam',
+        'email',
+        'password',
+        'leeftijd',
+        'rugnummer',
+        'positie',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
