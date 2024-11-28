@@ -12,7 +12,6 @@ class SpelerController extends Controller
      */
     public function index()
     {
-        // Haal alle spelers op en stuur ze naar de view
         $spelers = Speler::all();
         return view('spelers.index', compact('spelers'));
     }
@@ -22,7 +21,6 @@ class SpelerController extends Controller
      */
     public function create()
     {
-        // Toon het formulier voor het toevoegen van een nieuwe speler
         return view('spelers.create');
     }
 
@@ -31,7 +29,6 @@ class SpelerController extends Controller
      */
     public function store(Request $request)
     {
-        // Validatie van het formulier
         $request->validate([
             'naam' => 'required|string|max:255',
             'achternaam' => 'required|string|max:255',
@@ -41,10 +38,8 @@ class SpelerController extends Controller
             'email' => 'required|string|email|max:255|unique:spelers'
         ]);
 
-        // Nieuwe speler aanmaken
         Speler::create($request->all());
 
-        // Redirect terug naar de indexpagina met een succesbericht
         return redirect()->route('spelers.index')->with('success', 'Speler succesvol toegevoegd.');
     }
 
@@ -53,7 +48,6 @@ class SpelerController extends Controller
      */
     public function edit(Speler $speler)
     {
-        // Toon het formulier om een speler te bewerken
         return view('spelers.edit', compact('speler'));
     }
 
@@ -62,7 +56,6 @@ class SpelerController extends Controller
      */
     public function update(Request $request, Speler $speler)
     {
-        // Validatie van het formulier
         $request->validate([
             'naam' => 'required|string|max:255',
             'positie' => 'required|string|max:50',
@@ -70,10 +63,8 @@ class SpelerController extends Controller
             'leeftijd' => 'required|integer|min:0',
         ]);
 
-        // Speler bijwerken
         $speler->update($request->all());
 
-        // Redirect terug naar de indexpagina met een succesbericht
         return redirect()->route('spelers.index')->with('success', 'Speler succesvol bijgewerkt.');
     }
 
@@ -82,10 +73,8 @@ class SpelerController extends Controller
      */
     public function destroy(Speler $speler)
     {
-        // Speler verwijderen
         $speler->delete();
 
-        // Redirect terug naar de indexpagina met een succesbericht
         return redirect()->route('spelers.index')->with('success', 'Speler succesvol verwijderd.');
     }
 }

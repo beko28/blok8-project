@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('spelers', function (Blueprint $table) {
-            $table->id(); // Automatisch incrementerende primary key
-            $table->string('naam')->nullable(); // Naam van de speler
-            $table->string('achternaam')->nullable(); // Naam van de speler
-            $table->string('email')->unique(); // Uniek emailadres
-            $table->integer('leeftijd')->nullable(); // Rugnummer (optioneel)
-            $table->integer('rugnummer')->nullable(); // Rugnummer (optioneel)
-            $table->string('positie')->nullable(); // Positie op het veld (optioneel)
-            $table->timestamps(); // Aangemaakt en bijgewerkt tijdstempels
+            $table->id();
+            $table->string('naam')->nullable();
+            $table->string('achternaam')->nullable();
+            $table->string('email')->unique();
+            $table->integer('leeftijd')->nullable();
+            $table->integer('rugnummer')->nullable();
+            $table->string('positie')->nullable();
+            $table->timestamps();
         });
     }
 

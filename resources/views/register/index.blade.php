@@ -4,11 +4,22 @@
     <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-8">
         <!-- Stappenteller -->
         <div class="flex items-center justify-between mb-6">
-            <div class="w-full bg-gray-300 rounded-full h-2.5">
-
-            </div>
-            <span class="ml-2 text-sm font-medium text-gray-700">Stap {{ $step }} van 3</span>
+    <div class="w-full bg-gray-300 rounded-full h-2.5">
+        <div class="bg-blue-600 h-2.5 rounded-full"
+             style="
+                 @if($step == 1)
+                     width: 33%;
+                 @elseif($step == 2)
+                     width: 66%;
+                 @elseif($step == 3)
+                     width: 100%;
+                 @endif
+             ">
         </div>
+    </div>
+    <span class="ml-2 text-sm font-medium text-gray-700">Stap {{ $step }} van 3</span>
+</div>
+
 
         <form method="POST" action="{{ route('register.step', ['step' => $step]) }}" class="space-y-6">
             @csrf
