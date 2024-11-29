@@ -23,4 +23,10 @@ class Speler extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function team()
+{
+    return $this->belongsTo(Team::class);
+}
+
 }

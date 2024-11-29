@@ -15,6 +15,13 @@ class TeamController extends Controller
         $teams = Team::with('eigenaar')->get(); // Haal teams en hun eigenaren op
         return view('teams.index', compact('teams'));
     }
+    
+    public function show($id)
+{
+    $team = Team::with('spelers', 'leider')->findOrFail($id);
+    return view('teams.show', compact('team'));
+}
+
 
     // Meld een speler aan bij een team
     public function aanmelden(Request $request, $teamId)

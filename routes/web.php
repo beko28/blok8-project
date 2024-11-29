@@ -36,12 +36,12 @@ Route::middleware(['auth', 'can:isAdmin'])->group(function () {
     Route::delete('/admin/{user}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
 
-// Profile Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
+
 
 // Poule Routes
 Route::resource('poules', PouleController::class);
@@ -61,3 +61,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/register/step/{step?}', [RegistrationController::class, 'showStep'])->name('register.step');
 Route::post('/register/step/{step}', [RegistrationController::class, 'processStep']);
+
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+Route::get('/teams/{id}', [TeamController::class, 'show'])->name('teams.show');

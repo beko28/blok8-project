@@ -10,6 +10,7 @@
         <nav class="flex-grow text-center">
             <ul class="inline-flex space-x-6" style="margin-right: 100px;">
                 <li><a href="{{ route('spelers.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Spelers</a></li>
+                <li><a href="{{ route('teams.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Teams</a></li>
                 <li><a href="{{ route('poules.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Poules</a></li>
                 <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300">Nieuws</a></li>
                 <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300">Contact</a></li>

@@ -9,10 +9,6 @@
         </div>
     @endif
 
-    <a href="{{ route('poules.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 mb-6 inline-block">
-        Nieuwe Poule
-    </a>
-
     <table class="table-auto w-full mt-6 border border-gray-300 shadow-md">
         <thead class="bg-gray-200">
             <tr>

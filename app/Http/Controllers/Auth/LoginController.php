@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,7 +26,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/profile';
+
+    protected function username()
+{
+    return 'email'; // Gebruik het veld dat je gebruikt voor inloggen (bijv. 'email' of 'username')
+}
+
 
     /**
      * Create a new controller instance.
@@ -37,4 +44,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
+
+    protected function authenticated(Request $request, $user)
+{
+    // Stel een sessievariabele in voor de speler
+    $request->session()->put('id', $user->id);
+
+    return redirect()->intended($this->redirectPath());
+}
+
 }
