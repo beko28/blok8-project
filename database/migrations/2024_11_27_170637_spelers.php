@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('achternaam')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role')->default('speler');
+            $table->enum('role', ['speler', 'eigenaar', 'admin']);
             $table->integer('leeftijd')->nullable();
             $table->integer('rugnummer')->nullable();
             $table->string('positie')->nullable();

@@ -9,24 +9,20 @@ use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
-    // Laat alle teams zien
     public function index()
     {
-        $teams = Team::with('eigenaar')->get(); // Haal teams en hun eigenaren op
+        $teams = Team::with('eigenaar')->get();
         return view('teams.index', compact('teams'));
     }
-    
+
     public function show($id)
 {
     $team = Team::with('spelers', 'leider')->findOrFail($id);
     return view('teams.show', compact('team'));
 }
 
-
-    // Meld een speler aan bij een team
     public function aanmelden(Request $request, $teamId)
     {
-        // Controleer of de speler al een record heeft
         $existing = SpelersTeams::where('speler_id', $request->speler_id)
             ->where('team_id', $teamId)
             ->first();
@@ -35,7 +31,6 @@ class TeamController extends Controller
             return redirect()->back()->with('error', 'Je hebt je al aangemeld voor dit team.');
         }
 
-        // Maak een nieuwe aanmelding aan
         SpelersTeams::create([
             'speler_id' => $request->speler_id,
             'team_id' => $teamId,
@@ -45,7 +40,6 @@ class TeamController extends Controller
         return redirect()->back()->with('success', 'Aanmelding verzonden!');
     }
 
-    // Accepteer een aanmelding of uitnodiging
     public function accepteren(Request $request, $teamId)
     {
         $spelerTeam = SpelersTeams::where('team_id', $teamId)
@@ -60,7 +54,6 @@ class TeamController extends Controller
         return redirect()->back()->with('success', 'Speler is geaccepteerd in het team!');
     }
 
-    // Weiger een aanmelding of uitnodiging
     public function weigeren(Request $request, $teamId)
     {
         $spelerTeam = SpelersTeams::where('team_id', $teamId)
@@ -75,7 +68,6 @@ class TeamController extends Controller
         return redirect()->back()->with('success', 'Aanmelding is geweigerd.');
     }
 
-    // Nodig een speler uit voor een team
     public function uitnodigen(Request $request, $teamId)
     {
         $existing = SpelersTeams::where('speler_id', $request->speler_id)

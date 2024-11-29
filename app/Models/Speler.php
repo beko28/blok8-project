@@ -9,6 +9,17 @@ class Speler extends Authenticatable
 {
     use Notifiable;
 
+    // Toegestane rollen
+    public const ROLE_SPELER = 'speler';
+    public const ROLE_TEAMEIGENAAR = 'teameigenaar';
+    public const ROLE_ADMIN = 'admin';
+
+    public const ROLES = [
+        self::ROLE_SPELER,
+        self::ROLE_TEAMEIGENAAR,
+        self::ROLE_ADMIN,
+    ];
+
     protected $fillable = [
         'naam',
         'achternaam',
@@ -17,6 +28,7 @@ class Speler extends Authenticatable
         'leeftijd',
         'rugnummer',
         'positie',
+        'role',
     ];
 
     protected $hidden = [
@@ -25,8 +37,15 @@ class Speler extends Authenticatable
     ];
 
     public function team()
-{
-    return $this->belongsTo(Team::class);
-}
+    {
+        return $this->belongsTo(Team::class);
+    }
 
+    /**
+     * Controleer of een rol geldig is.
+     */
+    public static function isValidRole(string $role): bool
+    {
+        return in_array($role, self::ROLES);
+    }
 }

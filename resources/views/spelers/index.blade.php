@@ -38,6 +38,7 @@
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left">Achternaam</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left">Email</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left">Team</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left">Role</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,7 @@
                             <td class="px-6 py-4 border-b border-gray-200">
                                 {{ $speler->team ? $speler->team->naam : 'Geen team' }}
                             </td>
+                            <td class="px-6 py-4 border-b border-gray-200">{{ $speler->role }}</td>
                         </tr>
                     @endforeach
                 </tbody>

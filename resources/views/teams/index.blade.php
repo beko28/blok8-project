@@ -22,7 +22,7 @@
                         <tr class="hover:bg-gray-100 transition duration-300">
                             <td class="px-6 py-4 text-center border-b border-gray-200">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4 border-b border-gray-200">{{ $team->naam }}</td>
-                            <td class="px-6 py-4 border-b border-gray-200">{{ $team->leider ? $team->leider->naam : 'Geen leider' }}</td>
+                            <td class="px-6 py-4 border-b border-gray-200">{{ $team->eigenaar ? $team->eigenaar->achternaam : 'Geen leider' }}</td>
                             <td class="px-6 py-4 border-b border-gray-200">{{ $team->spelers->count() }}</td>
                             <td class="px-6 py-4 border-b border-gray-200 text-center">
                                 <a href="{{ route('teams.show', $team->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">

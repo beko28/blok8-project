@@ -64,7 +64,7 @@
                 <h2 class="text-2xl font-bold text-center text-gray-800">Stap 2: Spelergegevens</h2>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Naam</label>
+                        <label class="block text-sm font-medium text-gray-700">Voornaam</label>
                         <input type="text" name="naam" value="{{ old('naam') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" style="height: 40px; background-color:#ebf2fc;" required>
                     </div>
                     <div>
@@ -89,7 +89,7 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Voornaam</label>
-                        <input type="text" name="voornaam" value="{{ old('voornaam') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" style="height: 40px; background-color:#ebf2fc;" required>
+                        <input type="text" name="naam" value="{{ old('naam') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" style="height: 40px; background-color:#ebf2fc;" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Achternaam</label>
