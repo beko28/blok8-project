@@ -64,3 +64,10 @@ Route::post('/register/step/{step}', [RegistrationController::class, 'processSte
 
 Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
 Route::get('/teams/{id}', [TeamController::class, 'show'])->name('teams.show');
+
+
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profiel.update');
+Route::delete('/account/{id}', [ProfileController::class, 'destroy'])->name('account.delete');
+
+Route::get('/poules/assign-teams', [PouleController::class, 'assignTeamsToPoules'])->name('poules.assign-teams');
+Route::get('/poules/{poule}', [PouleController::class, 'show'])->name('poules.show');

@@ -35,4 +35,10 @@ class Team extends Model
             ->withPivot('status')
             ->withTimestamps();
     }
+    
+    public function poule()
+    {
+        return $this->belongsTo(Poule::class);
+    }
+
 }

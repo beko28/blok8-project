@@ -20,4 +20,10 @@ class Poule extends Model
     {
         return $this->belongsToMany(User::class, 'poule_user');
     }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class, 'poule_id');
+    }
+
 }

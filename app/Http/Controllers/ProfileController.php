@@ -48,4 +48,28 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show')->with('success', 'Aanvraag afgewezen!');
     }
+
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'naam' => 'required|string|max:255',
+        'achternaam' => 'required|string|max:255',
+        'email' => 'required|email|unique:spelers,email,' . $id,
+    ]);
+
+    $speler = Speler::findOrFail($id);
+    $speler->update($request->only(['naam', 'achternaam', 'email']));
+
+    return redirect()->back()->with('success', 'Gegevens succesvol bijgewerkt.');
+}
+
+public function destroy($id)
+{
+    $user = Speler::findOrFail($id);
+    $user->delete();
+
+    return redirect('/')->with('success', 'Je account is succesvol verwijderd.');
+}
+
+
 }

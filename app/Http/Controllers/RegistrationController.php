@@ -40,14 +40,14 @@ class RegistrationController extends Controller
         if ($step == 2) {
             if ($role === 'speler') {
                 $request->validate([
-                    'naam' => 'required|string|max:255',
+                    'voornaam' => 'required|string|max:255',
                     'achternaam' => 'required|string|max:255',
                     'leeftijd' => 'required|integer|min:0',
                     'rugnummer' => 'nullable|integer',
                     'positie' => 'nullable|string|max:255',
                 ]);
 
-                session()->put('registration', array_merge(session('registration'), $request->only(['naam', 'achternaam', 'leeftijd', 'rugnummer', 'positie'])));
+                session()->put('registration', array_merge(session('registration'), $request->only(['voornaam', 'achternaam', 'leeftijd', 'rugnummer', 'positie'])));
             } elseif ($role === 'eigenaar') {
                 $request->validate([
                     'voornaam' => 'required|string|max:255',

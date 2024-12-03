@@ -9,12 +9,20 @@
         </div>
     @endif
 
+    <!-- Knop om teams toe te wijzen -->
+    <div class="text-right mb-6">
+        <a href="{{ route('poules.assign-teams') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+            Teams Toewijzen
+        </a>
+    </div>
+
     <table class="table-auto w-full mt-6 border border-gray-300 shadow-md">
         <thead class="bg-gray-200">
             <tr>
                 <th class="px-4 py-2 text-left">Naam</th>
                 <th class="px-4 py-2 text-left">Eigenaar</th>
                 <th class="px-4 py-2 text-center">Deelnemers</th>
+                <th class="px-4 py-2 text-center">Teams</th>
                 <th class="px-4 py-2 text-center">Acties</th>
             </tr>
         </thead>
@@ -24,6 +32,13 @@
                 <td class="px-4 py-2">{{ $poule->naam }}</td>
                 <td class="px-4 py-2">{{ $poule->eigenaar->name }}</td>
                 <td class="px-4 py-2 text-center">{{ $poule->deelnemers->count() }}</td>
+                <td class="px-4 py-2">
+                    <ul class="list-disc pl-4">
+                        @foreach($poule->teams as $team)
+                            <li>{{ $team->naam }}</li>
+                        @endforeach
+                    </ul>
+                </td>
                 <td class="px-4 py-2 text-center space-x-2">
                     <a href="{{ route('poules.edit', $poule->id) }}" class="bg-yellow-400 text-white px-4 py-2 rounded shadow hover:bg-yellow-500">
                         Bewerken

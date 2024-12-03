@@ -57,6 +57,8 @@
         </div>
     </div>
 
+    <img src="{{ asset('images/nummer.png') }}" style="width: 100%;" data-aos="fade-up">
+
     <div class="bg-gray-200 py-16">
         <div class="container mx-auto px-6" data-aos="fade-up">
             <h2 class="text-4xl font-bold text-center mb-12">Waarom kiezen voor de Voetbal App?</h2>

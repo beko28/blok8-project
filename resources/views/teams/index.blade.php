@@ -25,9 +25,17 @@
                             <td class="px-6 py-4 border-b border-gray-200">{{ $team->eigenaar ? $team->eigenaar->achternaam : 'Geen leider' }}</td>
                             <td class="px-6 py-4 border-b border-gray-200">{{ $team->spelers->count() }}</td>
                             <td class="px-6 py-4 border-b border-gray-200 text-center">
-                                <a href="{{ route('teams.show', $team->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                                    Bekijken
-                                </a>
+                                @if(auth()->user() && auth()->user()->role === 'speler')
+                                    <form method="POST" action="{{ route('teams.aanmelden', $team->id) }}">
+                                        @csrf
+                                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                                            Aanmelden
+                                        </button>
+                                    </form>
+                                @else
+                                    <p class="text-gray-400">Alleen spelers kunnen zich aanmelden.</p>
+                                @endif
+                            </td>
                             </td>
                         </tr>
                     @endforeach

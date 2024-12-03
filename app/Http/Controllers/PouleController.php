@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Poule; // Correcte import van het model
+use App\Models\Team; // Correcte import van het model
 
 class PouleController extends Controller
 {
@@ -52,4 +53,28 @@ class PouleController extends Controller
         $poule->delete();
         return redirect()->route('poules.index')->with('success', 'Poule verwijderd!');
     }
+
+    public function assignTeamsToPoules()
+{
+    $teams = Team::whereNull('poule_id')->get();
+
+    if ($teams->isEmpty()) {
+        return redirect()->route('poules.index')->with('error', 'Geen teams beschikbaar om toe te wijzen.');
+    }
+
+    foreach ($teams as $team) {
+        $poule = Poule::withCount('teams')->where('teams_count', '<', 12)->first();
+
+        if (!$poule) {
+            $poule = Poule::create([
+                'naam' => 'Poule ' . (Poule::count() + 1),
+            ]);
+        }
+
+        $team->update(['poule_id' => $poule->id]);
+    }
+
+    return redirect()->route('poules.index')->with('success', 'Teams succesvol toegewezen aan poules.');
+}
+
 }
