@@ -77,4 +77,10 @@ class PouleController extends Controller
     return redirect()->route('poules.index')->with('success', 'Teams succesvol toegewezen aan poules.');
 }
 
+public function show(Poule $poule)
+{
+    return view('poules.show', compact('poule'));
+}
+
+
 }

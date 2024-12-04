@@ -70,4 +70,5 @@ Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('
 Route::delete('/account/{id}', [ProfileController::class, 'destroy'])->name('account.delete');
 
 Route::get('/poules/assign-teams', [PouleController::class, 'assignTeamsToPoules'])->name('poules.assign-teams');
-Route::get('/poules/{poule}', [PouleController::class, 'show'])->name('poules.show');
+Route::resource('poules', PouleController::class);
+

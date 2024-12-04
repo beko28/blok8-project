@@ -26,4 +26,25 @@ class Poule extends Model
         return $this->hasMany(Team::class, 'poule_id');
     }
 
+    protected static function boot()
+{
+    parent::boot();
+
+    static::creating(function ($team) {
+        // Zoek een beschikbare poule met minder dan 12 teams
+        $poule = Poule::withCount('teams')->where('teams_count', '<', 12)->first();
+
+        if (!$poule) {
+            // Maak een nieuwe poule aan
+            $poule = Poule::create([
+                'naam' => 'Poule ' . (Poule::count() + 1),
+            ]);
+        }
+
+        // Koppel het team aan de poule
+        $team->poule_id = $poule->id;
+    });
+}
+
+
 }
