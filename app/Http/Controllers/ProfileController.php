@@ -6,25 +6,29 @@ use Illuminate\Http\Request;
 use App\Models\Speler;
 use App\Models\Bericht;
 use App\Models\Aanvraag;
+use App\Models\Team;
 
 class ProfileController extends Controller
 {
     public function show(Request $request)
     {
         $spelerId = $request->session()->get('id');
-
+    
         if (!$spelerId) {
             return redirect()->route('login')->withErrors('Je moet ingelogd zijn om je profiel te bekijken.');
         }
-
+    
         $speler = Speler::with('team')->findOrFail($spelerId);
-
+    
         $berichten = Bericht::where('ontvanger_id', $spelerId)->latest()->get();
-
+    
         $aanvragen = Aanvraag::where('speler_id', $spelerId)->latest()->get();
-
-        return view('profile.show', compact('speler', 'berichten', 'aanvragen'));
+    
+        $teams = Team::all(); // Haal alle teams op
+    
+        return view('profile.show', compact('speler', 'berichten', 'aanvragen', 'teams'));
     }
+    
 
     public function accepteerAanvraag(Request $request, $id)
     {
@@ -50,18 +54,34 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id)
+    {
+        $request->validate([
+            'naam' => 'required|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'email' => 'required|email|unique:spelers,email,' . $id,
+            'team_id' => 'nullable|exists:teams,id',
+        ]);
+    
+        $speler = Speler::findOrFail($id);
+    
+        // Update de gegevens inclusief het team
+        $speler->update([
+            'naam' => $request->naam,
+            'achternaam' => $request->achternaam,
+            'email' => $request->email,
+            'team_id' => $request->team_id,
+        ]);
+    
+        return redirect()->route('profile.show')->with('success', 'Gegevens succesvol bijgewerkt.');
+    }
+    
+public function edit($id)
 {
-    $request->validate([
-        'naam' => 'required|string|max:255',
-        'achternaam' => 'required|string|max:255',
-        'email' => 'required|email|unique:spelers,email,' . $id,
-    ]);
-
     $speler = Speler::findOrFail($id);
-    $speler->update($request->only(['naam', 'achternaam', 'email']));
-
-    return redirect()->back()->with('success', 'Gegevens succesvol bijgewerkt.');
+    $teams = Team::all(); // Haal alle teams op
+    return view('profiel.edit', compact('speler', 'teams'));
 }
+
 
 public function destroy($id)
 {

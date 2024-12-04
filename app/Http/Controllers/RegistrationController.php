@@ -69,8 +69,9 @@ class RegistrationController extends Controller
                     'adres' => 'required|string|max:255',
                     'max_spelers' => 'required|integer|min:1',
                 ]);
-
+        
                 $user = Speler::create(session('registration'));
+        
                 Team::create([
                     'naam' => $request->teamnaam,
                     'adres' => $request->adres,
@@ -78,27 +79,10 @@ class RegistrationController extends Controller
                     'eigenaar_id' => $user->id,
                 ]);
             }
-
-            if ($role === 'eigenaar') {
-                $request->validate([
-                    'teamnaam' => 'required|string|max:255',
-                    'adres' => 'required|string|max:255',
-                    'max_spelers' => 'required|integer|min:1',
-                ]);
-            
-                $user = Speler::create(session('registration'));
-            
-                Team::create([
-                    'naam' => $request->teamnaam,
-                    'adres' => $request->adres,
-                    'max_spelers' => $request->max_spelers,
-                    'eigenaar_id' => $user->id,
-                ]);
-            }
-            
-
+        
             session()->forget('registration');
             return redirect()->route('home')->with('success', 'Registratie voltooid!');
         }
+        
     }
 }

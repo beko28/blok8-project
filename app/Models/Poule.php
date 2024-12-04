@@ -46,5 +46,15 @@ class Poule extends Model
     });
 }
 
+public function index()
+{
+    $poules = Poule::with(['teams' => function ($query) {
+        $query->orderByDesc('punten'); // Sorteer teams op punten
+    }])->get();
+
+    return view('poules.index', compact('poules'));
+}
+
+
 
 }

@@ -35,6 +35,18 @@
                     <label class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" name="email" value="{{ $speler->email }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Team</label>
+                    <select name="team_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <option value="" {{ $speler->team ? '' : 'selected' }}>Geen team</option>
+                        @foreach($teams as $team)
+                            <option value="{{ $team->id }}" {{ $speler->team && $speler->team->id == $team->id ? 'selected' : '' }}>
+                                {{ $team->naam }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="flex justify-end">
                     <button type="button" id="cancelEditProfile" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition mr-2">Annuleren</button>
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Opslaan</button>

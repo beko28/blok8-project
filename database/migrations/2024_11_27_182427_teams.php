@@ -18,10 +18,9 @@ class Teams extends Migration
             $table->string('naam');
             $table->string('adres');
             $table->integer('max_spelers');
-            $table->unsignedBigInteger('eigenaar_id');
-            $table->timestamps();
+            $table->foreignId('eigenaar_id')->constrained('spelers')->onDelete('cascade');
+            $table->timestamps();        
 
-            // Foreign key linking eigenaar_id to the spelers table
             $table->foreign('eigenaar_id')->references('id')->on('spelers')->onDelete('cascade');
         });
     }

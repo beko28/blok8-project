@@ -82,5 +82,4 @@ public function show(Poule $poule)
     return view('poules.show', compact('poule'));
 }
 
-
 }

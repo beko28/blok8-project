@@ -11,6 +11,7 @@ class Team extends Model
         'adres',
         'max_spelers',
         'eigenaar_id',
+        'punten',
     ];
 
     public function eigenaar()

@@ -48,4 +48,10 @@ class Speler extends Authenticatable
     {
         return in_array($role, self::ROLES);
     }
+
+    public function teamEigenaar()
+{
+    return $this->hasOne(Team::class, 'eigenaar_id'); // Koppel via het 'eigenaar_id'-veld
+}
+
 }
