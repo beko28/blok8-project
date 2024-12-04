@@ -56,7 +56,7 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'naam' => 'required|string|max:255',
+            'voornaam' => 'required|string|max:255',
             'achternaam' => 'required|string|max:255',
             'email' => 'required|email|unique:spelers,email,' . $id,
             'team_id' => 'nullable|exists:teams,id',
@@ -66,7 +66,7 @@ class ProfileController extends Controller
     
         // Update de gegevens inclusief het team
         $speler->update([
-            'naam' => $request->naam,
+            'voornaam' => $request->voornaam,
             'achternaam' => $request->achternaam,
             'email' => $request->email,
             'team_id' => $request->team_id,

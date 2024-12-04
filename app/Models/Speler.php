@@ -21,7 +21,7 @@ class Speler extends Authenticatable
     ];
 
     protected $fillable = [
-        'naam',
+        'voornaam',
         'achternaam',
         'email',
         'password',

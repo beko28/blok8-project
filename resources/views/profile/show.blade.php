@@ -7,7 +7,7 @@
     <div class="mb-8">
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Persoonlijke Informatie</h2>
         <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
-            <p><strong>Naam:</strong> {{ $speler->naam }}</p>
+            <p><strong>Voornaam:</strong> {{ $speler->voornaam }}</p>
             <p><strong>Achternaam:</strong> {{ $speler->achternaam }}</p>
             <p><strong>Email:</strong> {{ $speler->email }}</p>
             <p><strong>Team:</strong> {{ $speler->team ? $speler->team->naam : 'Geen team' }}</p>
@@ -24,8 +24,8 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Naam</label>
-                    <input type="text" name="naam" value="{{ $speler->naam }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <label class="block text-sm font-medium text-gray-700">Voornaam</label>
+                    <input type="text" name="voornaam" value="{{ $speler->voornaam }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Achternaam</label>

@@ -35,7 +35,7 @@
                 <thead class="bg-gradient-to-r from-blue-100 to-blue-200 text-gray-900 uppercase text-sm font-semibold">
                     <tr>
                         <th class="px-6 py-3 text-center">#</th>
-                        <th class="px-6 py-3 text-left">Naam</th>
+                        <th class="px-6 py-3 text-left">Voornaam</th>
                         <th class="px-6 py-3 text-left">Achternaam</th>
                         <th class="px-6 py-3 text-left">Email</th>
                         <th class="px-6 py-3 text-left">Team</th>
@@ -46,7 +46,7 @@
                     @foreach($spelers as $speler)
                         <tr class="hover:bg-blue-50 transition duration-200">
                             <td class="px-6 py-4 text-center text-sm font-semibold text-gray-700">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-800">{{ $speler->naam }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-800">{{ $speler->voornaam }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $speler->achternaam }}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $speler->email }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">

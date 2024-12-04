@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spelers', function (Blueprint $table) {
             $table->id();
-            $table->string('naam')->nullable();
+            $table->string('voornaam')->nullable();
             $table->string('achternaam')->nullable();
             $table->string('email')->unique();
             $table->string('password');
