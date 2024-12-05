@@ -11,7 +11,7 @@ class RegistrationController extends Controller
 {
     public function showStep(Request $request, $step = 1)
     {
-        $progress = $step * 33; // Bepaal de voortgang
+        $progress = $step * 33; // voortgang
         $role = session('registration.role', null);
 
         return view('register.index', compact('step', 'progress', 'role'));
@@ -24,7 +24,7 @@ class RegistrationController extends Controller
         if ($step == 1) {
             $request->validate([
                 'role' => 'required|in:speler,eigenaar',
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email|unique:spelers',
                 'password' => 'required|confirmed|min:8',
             ]);
 
@@ -70,13 +70,13 @@ class RegistrationController extends Controller
                     'max_spelers' => 'required|integer|min:1',
                 ]);
         
-                $user = Speler::create(session('registration'));
+                $speler = Speler::create(session('registration'));
         
                 Team::create([
                     'naam' => $request->teamnaam,
                     'adres' => $request->adres,
                     'max_spelers' => $request->max_spelers,
-                    'eigenaar_id' => $user->id,
+                    'eigenaar_id' => $speler->id,
                 ]);
             }
         

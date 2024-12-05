@@ -39,7 +39,7 @@
                         <th class="px-6 py-3 text-left">Achternaam</th>
                         <th class="px-6 py-3 text-left">Email</th>
                         <th class="px-6 py-3 text-left">Team</th>
-                        <th class="px-6 py-3 text-left">Role</th>
+                        <th class="px-6 py-3 text-left">Positie</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -64,7 +64,7 @@
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-800">
                                 <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-bold capitalize">
-                                    {{ $speler->role }}
+                                    {{ $speler->positie }}
                                 </span>
                             </td>
                         </tr>

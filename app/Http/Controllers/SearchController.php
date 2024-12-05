@@ -12,7 +12,7 @@ class SearchController extends Controller
         $query = Speler::with('team');
     
         if ($request->has('search') && $request->search) {
-            $query->where('naam', 'like', '%' . $request->search . '%')
+            $query->where('voornaam', 'like', '%' . $request->search . '%')
                   ->orWhere('achternaam', 'like', '%' . $request->search . '%');
         }
     
