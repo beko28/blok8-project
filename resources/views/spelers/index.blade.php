@@ -2,7 +2,6 @@
 <div class="container mx-auto p-8 bg-gradient-to-r from-blue-50 to-white rounded-lg shadow-lg">
     <h1 class="text-4xl font-extrabold mb-6 text-center text-gray-900">Overzicht van Spelers</h1>
 
-    <!-- Search Bar -->
     <div class="mb-8 flex justify-center">
         <form method="GET" action="{{ route('spelers.index') }}" class="flex w-full max-w-lg bg-white shadow-md rounded-lg">
             <input
@@ -18,7 +17,6 @@
         </form>
     </div>
 
-    <!-- Succesbericht -->
     @if(session('success'))
         <div class="bg-green-50 border-l-4 border-green-400 text-green-700 p-4 rounded-lg mb-6 shadow">
             <p class="font-medium">{{ session('success') }}</p>

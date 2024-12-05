@@ -24,7 +24,7 @@ class ProfileController extends Controller
     
         $aanvragen = Aanvraag::where('speler_id', $spelerId)->latest()->get();
     
-        $teams = Team::all(); // Haal alle teams op
+        $teams = Team::all();
     
         return view('profile.show', compact('speler', 'berichten', 'aanvragen', 'teams'));
     }
@@ -64,7 +64,6 @@ class ProfileController extends Controller
     
         $speler = Speler::findOrFail($id);
     
-        // Update de gegevens inclusief het team
         $speler->update([
             'voornaam' => $request->voornaam,
             'achternaam' => $request->achternaam,

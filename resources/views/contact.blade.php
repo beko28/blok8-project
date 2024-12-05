@@ -3,14 +3,12 @@
 <div class="container mx-auto p-8">
     <h1 class="text-2xl font-bold mb-4">Neem contact op</h1>
 
-    <!-- Succesbericht -->
     @if(session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
             {{ session('success') }}
         </div>
     @endif
 
-    <!-- Validatie fouten -->
     @if($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
             <ul>
@@ -21,7 +19,6 @@
         </div>
     @endif
 
-    <!-- Contactformulier -->
     <form action="{{ route('contact.send') }}" method="POST" class="bg-white shadow-md rounded p-6">
         @csrf
         <div class="mb-4">

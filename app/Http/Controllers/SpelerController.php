@@ -7,26 +7,17 @@ use Illuminate\Http\Request;
 
 class SpelerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $spelers = Speler::all();
         return view('spelers.index', compact('spelers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('spelers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -43,17 +34,11 @@ class SpelerController extends Controller
         return redirect()->route('spelers.index')->with('success', 'Speler succesvol toegevoegd.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Speler $speler)
     {
         return view('spelers.edit', compact('speler'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Speler $speler)
     {
         $request->validate([
@@ -68,9 +53,6 @@ class SpelerController extends Controller
         return redirect()->route('spelers.index')->with('success', 'Speler succesvol bijgewerkt.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Speler $speler)
     {
         $speler->delete();

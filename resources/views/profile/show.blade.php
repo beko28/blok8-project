@@ -3,7 +3,6 @@
 <div class="container mx-auto p-8 bg-white rounded-lg shadow-md">
     <h1 class="text-4xl font-bold mb-6 text-center text-gray-800">Mijn Profiel</h1>
     
-    <!-- Profielinformatie -->
     <div class="mb-8">
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Persoonlijke Informatie</h2>
         <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
@@ -16,7 +15,6 @@
         </div>
     </div>
     
-    <!-- Modal -->
     <div id="editProfileModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
         <div class="bg-white w-full max-w-lg p-6 rounded shadow-lg">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Gegevens Bewerken</h2>
