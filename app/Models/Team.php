@@ -24,4 +24,9 @@ class Team extends Model
             ->withPivot('status')
             ->withTimestamps();
     }
+    public function poules()
+{
+    return $this->belongsToMany(Poule::class, 'team_poules');
+}
+
 }

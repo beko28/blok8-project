@@ -24,7 +24,6 @@
         <form method="POST" action="{{ route('register.step', ['step' => $step]) }}" class="space-y-6">
             @csrf
 
-            <!-- Error berichten -->
             @if ($errors->any())
                 <div class="bg-red-500 text-white p-3 rounded">
                     <ul>

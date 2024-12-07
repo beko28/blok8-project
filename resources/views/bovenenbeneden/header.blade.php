@@ -19,7 +19,7 @@
             <ul class="flex flex-col lg:flex-row lg:space-x-6 lg:space-y-0 space-y-4">
                 <li><a href="{{ route('spelers.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Spelers</button></a></li>
                 <li><a href="{{ route('teams.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Teams</button></a></li>
-                <li><a href="{{ route('poules.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Poules</button></a></li>
+                <li><a href="{{ route('competities.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Poules</button></a></li>
                 <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Nieuws</button></a></li>
                 <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Contact</button></a></li>
             </ul>

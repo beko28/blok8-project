@@ -5,6 +5,7 @@ use App\Http\Controllers\SpelerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PouleController;
+use App\Http\Controllers\CompetitieController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -72,3 +73,5 @@ Route::delete('/account/{id}', [ProfileController::class, 'destroy'])->name('acc
 Route::get('/poules/assign-teams', [PouleController::class, 'assignTeamsToPoules'])->name('poules.assign-teams');
 Route::resource('poules', PouleController::class);
 
+Route::get('/competities', [PouleController::class, 'index'])->name('competities.index');
+Route::get('/competities/generate', [CompetitieController::class, 'genereerCompetitie']);

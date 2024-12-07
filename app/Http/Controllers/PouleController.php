@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Poule; // Correcte import van het model
 use App\Models\Team; // Correcte import van het model
+use App\Models\Competitie; // Correcte import van het model
 
 class PouleController extends Controller
 {
-    public function index()
-    {
-        $poules = Poule::with('deelnemers')->get();
-        return view('poules.index', compact('poules'));
-    }
 
     public function create()
     {
@@ -81,5 +77,17 @@ public function show(Poule $poule)
 {
     return view('poules.show', compact('poule'));
 }
+
+public function index()
+{
+    $competities = Competitie::with(['poules.teams.eigenaar' => function ($query) {
+        $query->select('id', 'naam');
+    }])->get();
+
+    return view('poules.index', compact('competities'));
+}
+
+
+
 
 }
