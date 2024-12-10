@@ -8,6 +8,7 @@ use App\Models\Bericht;
 use App\Models\Aanvraag;
 use App\Models\Team;
 use App\Models\SpelersTeams;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -37,15 +38,22 @@ class ProfileController extends Controller
     }
     
 
-    public function accepteerAanvraag($id)
+    public function accepteerAanvraag(Request $request, $id)
     {
-        $aanvraag = SpelersTeams::findOrFail($id);
+        $aanvraag = SpelersTeams::find($id);
     
-        if ($aanvraag->status !== 'aangevraagd') {
-            return redirect()->route('profile.show')->withErrors('Ongeldige aanvraag.');
+        if (!$aanvraag) {
+            return redirect()->route('profile.show')->withErrors('Aanvraag niet gevonden.');
         }
     
-        $aanvraag->update(['status' => 'geaccepteerd']);
+        if ($aanvraag->status !== 'aangevraagd') {
+            return redirect()->route('profile.show')->withErrors('Deze aanvraag kan niet worden geaccepteerd.');
+        }
+
+        Log::info('Aanvraag gevonden', $aanvraag->toArray());
+    
+        $aanvraag->status = 'geaccepteerd';
+        $aanvraag->save();
     
         return redirect()->route('profile.show')->with('success', 'Aanvraag succesvol geaccepteerd.');
     }
