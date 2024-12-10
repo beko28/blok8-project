@@ -9,7 +9,6 @@
             <p><strong>Voornaam:</strong> {{ $speler->voornaam }}</p>
             <p><strong>Achternaam:</strong> {{ $speler->achternaam }}</p>
             <p><strong>Email:</strong> {{ $speler->email }}</p>
-            <p><strong>Team:</strong> {{ $speler->team ? $speler->team->naam : 'Geen team' }}</p>
             <button id="editProfileButton" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition">Gegevens bewerken</button>
             <button id="deleteAccountButton" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Account verwijderen</button>
         </div>
@@ -32,17 +31,6 @@
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" name="email" value="{{ $speler->email }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Team</label>
-                    <select name="team_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                        <option value="" {{ $speler->team ? '' : 'selected' }}>Geen team</option>
-                        @foreach($teams as $team)
-                            <option value="{{ $team->id }}" {{ $speler->team && $speler->team->id == $team->id ? 'selected' : '' }}>
-                                {{ $team->naam }}
-                            </option>
-                        @endforeach
-                    </select>
                 </div>
 
                 <div class="flex justify-end">
@@ -73,31 +61,30 @@
     <div>
     <h2 class="text-2xl font-semibold text-gray-700 mb-4">Aanvragen om bij je team aan te sluiten</h2>
     <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
-    @if($aanvragen->isNotEmpty())
-    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-lg mt-6">
-        <h2 class="text-lg font-bold mb-4">Aanvragen voor jouw team</h2>
-        <ul>
-            @foreach($aanvragen as $aanvraag)
-                <li class="flex justify-between items-center mb-3">
-                    <span>{{ $aanvraag->voornaam }} {{ $aanvraag->achternaam }} heeft zich aangemeld.</span>
-                    <div>
-                        <form action="{{ route('aanvraag.accepteer', $aanvraag->id) }}" method="POST" class="inline-block">
-                            @csrf
-                            <button type="submit" class="text-green-500 hover:text-green-700">Accepteer</button>
-                        </form>
-                        <form action="{{ route('aanvraag.afwijzen', $aanvraag->id) }}" method="POST" class="inline-block ml-3">
-                            @csrf
-                            <button type="submit" class="text-red-500 hover:text-red-700">Weiger</button>
-                        </form>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
-    </div>
-@else
-    <p class="text-gray-500 italic">Er zijn momenteel geen aanvragen voor jouw team.</p>
-@endif
-
+        @if($aanvragen->isNotEmpty())
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-lg mt-6">
+            <h2 class="text-lg font-bold mb-4">Aanvragen voor jouw team</h2>
+            <ul>
+                @foreach($aanvragen as $aanvraag)
+                    <li class="flex justify-between items-center mb-3">
+                        <span>{{ $aanvraag->voornaam }} {{ $aanvraag->achternaam }} heeft zich aangemeld.</span>
+                        <div>
+                            <form action="{{ route('aanvraag.accepteer', $aanvraag->id) }}" method="POST" class="inline-block">
+                                @csrf
+                                <button type="submit" class="text-green-500 hover:text-green-700">Accepteer</button>
+                            </form>
+                            <form action="{{ route('aanvraag.afwijzen', $aanvraag->id) }}" method="POST" class="inline-block ml-3">
+                                @csrf
+                                <button type="submit" class="text-red-500 hover:text-red-700">Weiger</button>
+                            </form>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        @else
+        <p class="text-gray-500 italic">Er zijn momenteel geen aanvragen voor jouw team.</p>
+        @endif
     </div>
 </div>
 

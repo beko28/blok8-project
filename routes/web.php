@@ -11,23 +11,18 @@ use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Home Routes
 Route::get('/', function () {
     return view('home');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Auth Routes
 Auth::routes();
 
-// Contact Routes
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
-// Speler Routes
 Route::resource('spelers', SpelerController::class);
 
-// Admin Routes (alleen toegankelijk voor admins)
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
@@ -43,31 +38,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-
-// Poule Routes
 Route::resource('poules', PouleController::class);
 Route::post('/poules/{poule}/koppel-team', [PouleController::class, 'koppelTeam'])->name('poules.koppel-team');
-
-// Team Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-    Route::post('/teams/{team}/aanmelden', [TeamController::class, 'aanmelden'])->name('teams.aanmelden');
-    Route::post('/teams/{team}/accepteren', [TeamController::class, 'accepteren'])->name('teams.accepteren');
-    Route::post('/teams/{team}/weigeren', [TeamController::class, 'weigeren'])->name('teams.weigeren');
-    Route::post('/teams/{team}/uitnodigen', [TeamController::class, 'uitnodigen'])->name('teams.uitnodigen');
-    Route::get('/teams/{team}/spelers', [TeamController::class, 'spelers'])->name('teams.spelers');
-    Route::post('/teams/{team}/spelers/{speler}/verwijderen', [TeamController::class, 'verwijderSpeler'])->name('teams.spelers.verwijderen');
-});
-
-Route::post('/aanvraag/{id}/accepteer', [ProfileController::class, 'accepteerAanvraag'])->name('aanvraag.accepteer');
-Route::post('/aanvraag/{id}/afwijzen', [ProfileController::class, 'afwijzenAanvraag'])->name('aanvraag.afwijzen');
 
 Route::get('/register/step/{step?}', [RegistrationController::class, 'showStep'])->name('register.step');
 Route::post('/register/step/{step}', [RegistrationController::class, 'processStep']);
 
 Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
 Route::get('/teams/{id}', [TeamController::class, 'show'])->name('teams.show');
-
 
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profiel.update');
 Route::delete('/account/{id}', [ProfileController::class, 'destroy'])->name('account.delete');
@@ -78,5 +56,5 @@ Route::resource('poules', PouleController::class);
 Route::get('/competities', [PouleController::class, 'index'])->name('competities.index');
 Route::get('/competities/generate', [CompetitieController::class, 'genereerCompetitie']);
 
-Route::post('/aanvraag/{id}/accepteren', [ProfileController::class, 'accepteerAanvraag'])->name('aanvraag.accepteren');
-Route::delete('/aanvraag/{id}/afwijzen', [ProfileController::class, 'afwijzenAanvraag'])->name('aanvraag.afwijzen');
+Route::post('/aanvraag/{id}/accepteer', [ProfileController::class, 'accepteerAanvraag'])->name('aanvraag.accepteer');
+Route::post('/aanvraag/{id}/afwijzen', [ProfileController::class, 'afwijzenAanvraag'])->name('aanvraag.afwijzen');

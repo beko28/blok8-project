@@ -37,7 +37,7 @@ class ProfileController extends Controller
     }
     
 
-    public function accepteerAanvraag(Request $request, $id)
+    public function accepteerAanvraag($id)
     {
         $aanvraag = SpelersTeams::findOrFail($id);
     
@@ -80,21 +80,19 @@ class ProfileController extends Controller
         return redirect()->route('profile.show')->with('success', 'Gegevens succesvol bijgewerkt.');
     }
     
-public function edit($id)
-{
-    $speler = Speler::findOrFail($id);
-    $teams = Team::all(); // Haal alle teams op
-    return view('profiel.edit', compact('speler', 'teams'));
-}
+    public function edit($id)
+    {
+        $speler = Speler::findOrFail($id);
+        $teams = Team::all(); // Haal alle teams op
+        return view('profiel.edit', compact('speler', 'teams'));
+    }
 
+    public function destroy($id)
+    {
+        $user = Speler::findOrFail($id);
+        $user->delete();
 
-public function destroy($id)
-{
-    $user = Speler::findOrFail($id);
-    $user->delete();
-
-    return redirect('/')->with('success', 'Je account is succesvol verwijderd.');
-}
-
+        return redirect('/')->with('success', 'Je account is succesvol verwijderd.');
+    }
 
 }
