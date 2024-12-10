@@ -53,7 +53,6 @@
         </div>
     </div>
 
-    <!-- Notificaties -->
     <div class="mb-8">
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Notificaties</h2>
         <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
@@ -72,35 +71,36 @@
         </div>
     </div>
     <div>
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Aanvragen om bij een team aan te sluiten</h2>
-            <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
-                @if($aanvragen->isEmpty())
-                    <p class="text-gray-500">Je hebt geen nieuwe aanvragen.</p>
-                @else
-                    <ul class="list-disc pl-6 space-y-2">
-                        @foreach($aanvragen as $aanvraag)
-                            <li class="bg-white p-4 rounded shadow flex justify-between items-center">
-                                <div>
-                                    <p><strong>Team:</strong> {{ $aanvraag->team->naam }}</p>
-                                    <p class="text-sm text-gray-600">{{ $aanvraag->created_at->diffForHumans() }}</p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <form method="POST" action="{{ route('aanvraag.accepteren', $aanvraag->id) }}">
-                                        @csrf
-                                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Accepteren</button>
-                                    </form>
-                                    <form method="POST" action="{{ route('aanvraag.afwijzen', $aanvraag->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Afwijzen</button>
-                                    </form>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
-        </div>
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Aanvragen om bij je team aan te sluiten</h2>
+    <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
+    @if($aanvragen->isNotEmpty())
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-lg mt-6">
+        <h2 class="text-lg font-bold mb-4">Aanvragen voor jouw team</h2>
+        <ul>
+            @foreach($aanvragen as $aanvraag)
+                <li class="flex justify-between items-center mb-3">
+                    <span>{{ $aanvraag->voornaam }} {{ $aanvraag->achternaam }} heeft zich aangemeld.</span>
+                    <div>
+                        <form action="{{ route('aanvraag.accepteer', $aanvraag->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            <button type="submit" class="text-green-500 hover:text-green-700">Accepteer</button>
+                        </form>
+                        <form action="{{ route('aanvraag.afwijzen', $aanvraag->id) }}" method="POST" class="inline-block ml-3">
+                            @csrf
+                            <button type="submit" class="text-red-500 hover:text-red-700">Weiger</button>
+                        </form>
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@else
+    <p class="text-gray-500 italic">Er zijn momenteel geen aanvragen voor jouw team.</p>
+@endif
+
+    </div>
+</div>
+
 </div>
 <div id="deleteAccountModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
     <div class="bg-white w-full max-w-md p-6 rounded shadow-lg">

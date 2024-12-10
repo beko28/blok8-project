@@ -23,18 +23,29 @@ class TeamController extends Controller
 
 public function aanmelden(Request $request, $teamId)
 {
-    $existing = Speler::where('speler_id', $request->speler_id)
+    $speler = auth()->user();
+
+    if (!$speler) {
+        return redirect()->back()->withErrors(['message' => 'Je moet ingelogd zijn om je aan te melden.']);
+    }
+
+    $existing = SpelersTeams::where('speler_id', $speler->id)
         ->where('team_id', $teamId)
         ->first();
 
+    if ($existing) {
+        return redirect()->back()->withErrors(['message' => 'Je hebt je al aangemeld voor dit team.']);
+    }
+
     SpelersTeams::create([
-        'speler_id' => $request->speler_id,
+        'speler_id' => $speler->id,
         'team_id' => $teamId,
         'status' => 'aangevraagd',
     ]);
-    
-    return redirect()->back()->with('success', 'Aanmelding verzonden!');
+
+    return redirect()->back()->with('success', 'Aanmelding succesvol verzonden!');
 }
+
 
     public function accepteren(Request $request, $teamId)
     {

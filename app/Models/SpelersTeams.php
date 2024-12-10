@@ -30,4 +30,6 @@ class SpelersTeams extends Model
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
+
+    
 }

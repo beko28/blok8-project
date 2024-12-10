@@ -2,21 +2,6 @@
 <div class="container mx-auto p-8 bg-gradient-to-r from-blue-50 to-white rounded-lg shadow-lg">
     <h1 class="text-4xl font-extrabold mb-6 text-center text-gray-900">Overzicht van Spelers</h1>
 
-    <div class="mb-8 flex justify-center">
-        <form method="GET" action="{{ route('spelers.index') }}" class="flex w-full max-w-lg bg-white shadow-md rounded-lg">
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="Zoek op naam..."
-                class="flex-grow px-4 py-3 border-none rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-r-lg hover:bg-blue-600 transition">
-                Zoeken
-            </button>
-        </form>
-    </div>
-
     @if(session('success'))
         <div class="bg-green-50 border-l-4 border-green-400 text-green-700 p-4 rounded-lg mb-6 shadow">
             <p class="font-medium">{{ session('success') }}</p>
@@ -48,13 +33,13 @@
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $speler->achternaam }}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $speler->email }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">
-                                @if($speler->role === 'eigenaar' && $speler->teamEigenaar)
+                                @if($speler->acceptedTeams->isNotEmpty())
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-bold">
+                                        {{ $speler->acceptedTeams->first()->naam }}
+                                    </span>
+                                @elseif($speler->role === 'eigenaar' && $speler->teamEigenaar)
                                     <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-bold">
                                         Eigenaar van: {{ $speler->teamEigenaar->naam }}
-                                    </span>
-                                @elseif($speler->team)
-                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-bold">
-                                        {{ $speler->team->naam }}
                                     </span>
                                 @else
                                     <span class="text-gray-400 italic">Geen team</span>

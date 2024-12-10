@@ -28,7 +28,7 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 Route::resource('spelers', SpelerController::class);
 
 // Admin Routes (alleen toegankelijk voor admins)
-Route::middleware(['auth', 'can:isAdmin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/teams/{team}/spelers/{speler}/verwijderen', [TeamController::class, 'verwijderSpeler'])->name('teams.spelers.verwijderen');
 });
 
+Route::post('/aanvraag/{id}/accepteer', [ProfileController::class, 'accepteerAanvraag'])->name('aanvraag.accepteer');
+Route::post('/aanvraag/{id}/afwijzen', [ProfileController::class, 'afwijzenAanvraag'])->name('aanvraag.afwijzen');
 
 Route::get('/register/step/{step?}', [RegistrationController::class, 'showStep'])->name('register.step');
 Route::post('/register/step/{step}', [RegistrationController::class, 'processStep']);
@@ -75,3 +77,6 @@ Route::resource('poules', PouleController::class);
 
 Route::get('/competities', [PouleController::class, 'index'])->name('competities.index');
 Route::get('/competities/generate', [CompetitieController::class, 'genereerCompetitie']);
+
+Route::post('/aanvraag/{id}/accepteren', [ProfileController::class, 'accepteerAanvraag'])->name('aanvraag.accepteren');
+Route::delete('/aanvraag/{id}/afwijzen', [ProfileController::class, 'afwijzenAanvraag'])->name('aanvraag.afwijzen');

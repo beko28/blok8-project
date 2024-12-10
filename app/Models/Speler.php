@@ -9,7 +9,7 @@ class Speler extends Authenticatable
 {
     use Notifiable;
 
-    // Toegestane rollen
+    // Rollen constanten
     public const ROLE_SPELER = 'speler';
     public const ROLE_TEAMEIGENAAR = 'teameigenaar';
     public const ROLE_ADMIN = 'admin';
@@ -36,22 +36,37 @@ class Speler extends Authenticatable
         'remember_token',
     ];
 
+    public function acceptedTeams(){
+    return $this->belongsToMany(Team::class, 'spelers_teams')
+        ->withPivot('status')
+        ->wherePivot('status', 'geaccepteerd')
+        ->withTimestamps();
+    }
+
     public function team()
     {
         return $this->belongsTo(Team::class);
     }
 
-    /**
-     * Controleer of een rol geldig is.
-     */
+    public function teamEigenaar()
+    {
+        return $this->hasOne(Team::class, 'eigenaar_id');
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'spelers_teams')
+            ->withPivot('status')
+            ->withTimestamps();
+    }
+
     public static function isValidRole(string $role): bool
     {
         return in_array($role, self::ROLES);
     }
 
-    public function teamEigenaar()
-{
-    return $this->hasOne(Team::class, 'eigenaar_id'); // Koppel via het 'eigenaar_id'-veld
-}
-
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

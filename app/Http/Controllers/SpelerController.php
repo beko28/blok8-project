@@ -9,9 +9,11 @@ class SpelerController extends Controller
 {
     public function index()
     {
-        $spelers = Speler::all();
+        $spelers = Speler::with(['acceptedTeams'])->get();
+    
         return view('spelers.index', compact('spelers'));
     }
+    
 
     public function create()
     {
@@ -21,12 +23,13 @@ class SpelerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'naam' => 'required|string|max:255',
+            'voornaam' => 'required|string|max:255',
             'achternaam' => 'required|string|max:255',
             'positie' => 'required|string|max:50',
             'rugnummer' => 'nullable|integer|min:0',
             'leeftijd' => 'required|integer|min:0',
-            'email' => 'required|string|email|max:255|unique:spelers'
+            'email' => 'required|string|email|max:255|unique:spelers',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
         Speler::create($request->all());
@@ -42,7 +45,8 @@ class SpelerController extends Controller
     public function update(Request $request, Speler $speler)
     {
         $request->validate([
-            'naam' => 'required|string|max:255',
+            'voornaam' => 'required|string|max:255',
+            'achternaam' => 'required|string|max:255',
             'positie' => 'required|string|max:50',
             'rugnummer' => 'nullable|integer|min:0',
             'leeftijd' => 'required|integer|min:0',

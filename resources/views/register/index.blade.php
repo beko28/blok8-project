@@ -80,7 +80,21 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Positie (optioneel)</label>
-                        <input type="text" name="positie" value="{{ old('positie') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" style="height: 40px; background-color:#ebf2fc;">
+                        <select name="positie" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" style="height: 40px; background-color:#ebf2fc;">
+                            <option value="" selected>Kies een positie</option>
+                            <option value="keeper">Keeper</option>
+                            <option value="verdediger">Verdediger</option>
+                            <option value="middenvelder">Middenvelder</option>
+                            <option value="aanvaller">Aanvaller</option>
+                            <option value="spits">Spits</option>
+                            <option value="rechtsback">Rechtsback</option>
+                            <option value="linksback">Linksback</option>
+                            <option value="centrumverdediger">Centrumverdediger</option>
+                            <option value="rechtervleugelspeler">Rechtervleugelspeler</option>
+                            <option value="linkervleugelspeler">Linkervleugelspeler</option>
+                            <option value="offensieve middenvelder">Offensieve Middenvelder</option>
+                            <option value="defensieve middenvelder">Defensieve Middenvelder</option>
+                        </select>
                     </div>
                 </div>
             @elseif ($step == 2 && $role === 'eigenaar')

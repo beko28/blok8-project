@@ -27,7 +27,9 @@
                                     {{ $team->eigenaar ? $team->eigenaar->achternaam : 'Geen leider' }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-center text-sm text-gray-800">{{ $team->spelers->count() }}</td>
+                            <td class="px-6 py-4 text-center text-sm text-gray-800">
+                                {{ $team->spelers->where('pivot.status', 'geaccepteerd')->count() }}
+                            </td>
                             <td class="px-6 py-4 text-center">
                                 @if(auth()->user() && auth()->user()->role === 'speler')
                                 <form method="POST" action="{{ route('teams.aanmelden', $team->id) }}">
@@ -39,7 +41,6 @@
                                         <span class="relative">Aanmelden</span>
                                     </button>
                                 </form>
-
                                 @else
                                     <span class="text-gray-400 text-sm italic">Alleen spelers kunnen zich aanmelden.</span>
                                 @endif
