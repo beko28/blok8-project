@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PouleController;
 use App\Http\Controllers\CompetitieController;
+use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -58,3 +59,22 @@ Route::get('/competities/generate', [CompetitieController::class, 'genereerCompe
 
 Route::post('/aanvraag/{id}/accepteer', [ProfileController::class, 'accepteerAanvraag'])->name('aanvraag.accepteer');
 Route::post('/aanvraag/{id}/afwijzen', [ProfileController::class, 'afwijzenAanvraag'])->name('aanvraag.afwijzen');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/nieuws/create', [NieuwsController::class, 'create'])->name('nieuws.create');
+    Route::post('/nieuws', [NieuwsController::class, 'store'])->name('nieuws.store');
+});
+
+Route::get('/nieuws', [NieuwsController::class, 'index'])->name('nieuws.index');
+Route::get('/nieuws/create', [NieuwsController::class, 'create'])->name('nieuws.create')->middleware('auth');
+Route::post('/nieuws', [NieuwsController::class, 'store'])->name('nieuws.store')->middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+    Route::post('/teams/{team}/aanmelden', [TeamController::class, 'aanmelden'])->name('teams.aanmelden');
+    Route::post('/teams/{team}/accepteren', [TeamController::class, 'accepteren'])->name('teams.accepteren');
+    Route::post('/teams/{team}/weigeren', [TeamController::class, 'weigeren'])->name('teams.weigeren');
+    Route::post('/teams/{team}/uitnodigen', [TeamController::class, 'uitnodigen'])->name('teams.uitnodigen');
+    Route::get('/teams/{team}/spelers', [TeamController::class, 'spelers'])->name('teams.spelers');
+    Route::post('/teams/{team}/spelers/{speler}/verwijderen', [TeamController::class, 'verwijderSpeler'])->name('teams.spelers.verwijderen');
+});

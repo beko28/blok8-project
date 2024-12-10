@@ -20,7 +20,7 @@
                 <li><a href="{{ route('spelers.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Spelers</button></a></li>
                 <li><a href="{{ route('teams.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Teams</button></a></li>
                 <li><a href="{{ route('competities.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Poules</button></a></li>
-                <li><a href="#" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Nieuws</button></a></li>
+                <li><a href="{{ route('nieuws.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Nieuws</button></a></li>
                 <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Contact</button></a></li>
             </ul>
 

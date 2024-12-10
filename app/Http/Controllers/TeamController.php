@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\Nieuws;
 use App\Models\Speler;
 use App\Models\SpelersTeams;
 use Illuminate\Http\Request;
@@ -55,6 +56,11 @@ public function aanmelden(Request $request, $teamId)
 
         $spelerTeam->update(['status' => 'geaccepteerd']);
         return redirect()->back()->with('success', 'Speler is geaccepteerd in het team!');
+
+        Nieuws::create([
+            'titel' => 'Nieuwe speler in team!',
+            'inhoud' => auth()->user()->name . ' heeft zich aangesloten bij team ' . $team->naam,
+        ]);
     }
 
     public function weigeren(Request $request, $teamId)
