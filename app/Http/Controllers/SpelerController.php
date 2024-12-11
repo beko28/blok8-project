@@ -7,11 +7,25 @@ use Illuminate\Http\Request;
 
 class SpelerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $spelers = Speler::with(['acceptedTeams'])->get();
+
+        $query = Speler::query();
+
+        if ($request->filled('search')) {
+            $search = $request->get('search');
+            $query->where(function($q) use ($search) {
+                $q->where('voornaam', 'like', '%'.$search.'%')
+                  ->orWhere('achternaam', 'like', '%'.$search.'%')
+                  ->orWhere('email', 'like', '%'.$search.'%');
+            });
+        }
+    
+        $spelers = $query->get();
     
         return view('spelers.index', compact('spelers'));
+    
     }
     
 

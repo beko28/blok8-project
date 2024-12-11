@@ -1,6 +1,18 @@
 @include('bovenenbeneden.header')
 <div class="container mx-auto p-8 bg-gradient-to-r from-blue-50 to-white rounded-lg shadow-lg">
     <h1 class="text-4xl font-extrabold mb-6 text-center text-gray-900">Overzicht van Spelers</h1>
+    <div class="mb-4 flex justify-center">
+        <form method="GET" action="{{ route('spelers.index') }}" class="flex">
+            <input type="text" name="search" placeholder="Zoek op naam of email"
+                class="border border-gray-300 rounded-l px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value="{{ request('search') }}">
+            <button type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 transition">
+                Zoek
+            </button>
+        </form>
+    </div>
+
 
     @if(session('success'))
         <div class="bg-green-50 border-l-4 border-green-400 text-green-700 p-4 rounded-lg mb-6 shadow">

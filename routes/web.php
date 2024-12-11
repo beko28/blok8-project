@@ -69,12 +69,10 @@ Route::get('/nieuws', [NieuwsController::class, 'index'])->name('nieuws.index');
 Route::get('/nieuws/create', [NieuwsController::class, 'create'])->name('nieuws.create')->middleware('auth');
 Route::post('/nieuws', [NieuwsController::class, 'store'])->name('nieuws.store')->middleware('auth');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-    Route::post('/teams/{team}/aanmelden', [TeamController::class, 'aanmelden'])->name('teams.aanmelden');
-    Route::post('/teams/{team}/accepteren', [TeamController::class, 'accepteren'])->name('teams.accepteren');
-    Route::post('/teams/{team}/weigeren', [TeamController::class, 'weigeren'])->name('teams.weigeren');
-    Route::post('/teams/{team}/uitnodigen', [TeamController::class, 'uitnodigen'])->name('teams.uitnodigen');
-    Route::get('/teams/{team}/spelers', [TeamController::class, 'spelers'])->name('teams.spelers');
-    Route::post('/teams/{team}/spelers/{speler}/verwijderen', [TeamController::class, 'verwijderSpeler'])->name('teams.spelers.verwijderen');
-});
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+Route::post('/teams/{team}/aanmelden', [TeamController::class, 'aanmelden'])->name('teams.aanmelden');
+Route::post('/teams/{team}/accepteren', [TeamController::class, 'accepteren'])->name('teams.accepteren');
+Route::post('/teams/{team}/weigeren', [TeamController::class, 'weigeren'])->name('teams.weigeren');
+Route::post('/teams/{team}/uitnodigen', [TeamController::class, 'uitnodigen'])->name('teams.uitnodigen');
+Route::get('/teams/{team}/spelers', [TeamController::class, 'spelers'])->name('teams.spelers');
+Route::post('/teams/{team}/spelers/{speler}/verwijderen', [TeamController::class, 'verwijderSpeler'])->name('teams.spelers.verwijderen');

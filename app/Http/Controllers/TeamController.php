@@ -10,9 +10,19 @@ use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $teams = Team::with('eigenaar')->get();
+
+        $query = Team::with('eigenaar', 'spelers');
+
+    if ($request->filled('search')) {
+        $search = $request->get('search');
+        $query->where('naam', 'like', '%' . $search . '%');
+    }
+
+    $teams = $query->get();
+    
         return view('teams.index', compact('teams'));
     }
 
