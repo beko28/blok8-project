@@ -34,13 +34,14 @@
                                 <p class="text-gray-600 text-sm">Wil zich aansluiten bij jouw team</p>
                             </div>
                             <div class="flex space-x-4">
-                                <form action="{{ route('aanvraag.accepteer', $aanvraag->id) }}" method="POST">
+                                <form action="{{ route('aanvraag.accepteer', $aanvraag->pivot->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                                    <button type="submit" 
+                                        class="bg-green-500 text-white font-semibold px-4 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">
                                         Accepteren
                                     </button>
                                 </form>
-                                <form action="{{ route('aanvraag.afwijzen', $aanvraag->id) }}" method="POST">
+                                <form action="{{ route('aanvraag.afwijzen', $aanvraag->pivot->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
                                         Weigeren

@@ -21,7 +21,7 @@ class Team extends Model
     public function spelers()
     {
         return $this->belongsToMany(Speler::class, 'spelers_teams')
-            ->withPivot('status')
+            ->withPivot('id', 'status')
             ->withTimestamps();
     }
     public function poules()

@@ -8,7 +8,6 @@ use App\Models\Bericht;
 use App\Models\Aanvraag;
 use App\Models\Team;
 use App\Models\SpelersTeams;
-use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -31,13 +30,12 @@ class ProfileController extends Controller
                 ->wherePivot('status', 'aangevraagd')
                 ->get();
         }
-    
+            
         $teams = Team::all();
     
         return view('profile.show', compact('speler', 'berichten', 'aanvragen', 'teams'));
     }
     
-
     public function accepteerAanvraag(Request $request, $id)
     {
         $aanvraag = SpelersTeams::find($id);
@@ -49,8 +47,6 @@ class ProfileController extends Controller
         if ($aanvraag->status !== 'aangevraagd') {
             return redirect()->route('profile.show')->withErrors('Deze aanvraag kan niet worden geaccepteerd.');
         }
-
-        Log::info('Aanvraag gevonden', $aanvraag->toArray());
     
         $aanvraag->status = 'geaccepteerd';
         $aanvraag->save();
@@ -61,10 +57,20 @@ class ProfileController extends Controller
     
     public function afwijzenAanvraag($id)
     {
-        $aanvraag = Aanvraag::findOrFail($id);
-        $aanvraag->delete();
-
-        return redirect()->route('profile.show')->with('success', 'Aanvraag afgewezen!');
+        $aanvraag = SpelersTeams::find($id);
+    
+        if (!$aanvraag) {
+            return redirect()->route('profile.show')->withErrors('Aanvraag niet gevonden.');
+        }
+    
+        if ($aanvraag->status !== 'aangevraagd') {
+            return redirect()->route('profile.show')->withErrors('Deze aanvraag kan niet worden geaccepteerd.');
+        }
+    
+        $aanvraag->status = 'geweigerd';
+        $aanvraag->save();
+    
+        return redirect()->route('profile.show')->with('success', 'Aanvraag succesvol geaccepteerd.');
     }
 
     public function update(Request $request, $id)
