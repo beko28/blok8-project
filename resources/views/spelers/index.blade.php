@@ -25,7 +25,6 @@
             <p class="text-gray-500 text-lg italic">Er zijn geen spelers gevonden.</p>
         </div>
     @else
-        <!-- Responsive container voor kleinere schermen -->
         <div class="overflow-x-auto">
             <div class="overflow-hidden rounded-lg shadow-lg border border-gray-200">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -66,7 +65,6 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <!-- Voorbeeld actie-knop, pas route en logica naar eigen wens aan -->
                                     <a href="{{ route('spelers.show', $speler->id) }}"
                                        class="bg-indigo-500 text-white px-3 py-1 rounded-full text-xs font-semibold hover:bg-indigo-600 transition">
                                         Bekijk
@@ -79,7 +77,6 @@
             </div>
         </div>
 
-        <!-- Paginatie (mits je in de controller paginate() gebruikt) -->
         @if(method_exists($spelers, 'links'))
             <div class="mt-6">
                 {{ $spelers->links() }}

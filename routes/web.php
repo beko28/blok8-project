@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PouleController;
 use App\Http\Controllers\CompetitieController;
+use App\Http\Controllers\TeamManagerController;
 use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TeamController;
@@ -76,3 +77,12 @@ Route::post('/teams/{team}/weigeren', [TeamController::class, 'weigeren'])->name
 Route::post('/teams/{team}/uitnodigen', [TeamController::class, 'uitnodigen'])->name('teams.uitnodigen');
 Route::get('/teams/{team}/spelers', [TeamController::class, 'spelers'])->name('teams.spelers');
 Route::post('/teams/{team}/spelers/{speler}/verwijderen', [TeamController::class, 'verwijderSpeler'])->name('teams.spelers.verwijderen');
+
+
+Route::get('/teammanager', [TeamManagerController::class, 'index'])->name('teammanager.index');
+Route::post('/teammanager/speler/uitnodigen', [TeamManagerController::class, 'uitnodigen'])->name('teammanager.uitnodigen');
+Route::post('/teammanager/aanvraag/{pivotId}/accepteren', [TeamManagerController::class, 'accepteren'])->name('teammanager.accepteren');
+Route::post('/teammanager/aanvraag/{pivotId}/weigeren', [TeamManagerController::class, 'weigeren'])->name('teammanager.weigeren');
+Route::delete('/teammanager/speler/{pivotId}/verwijderen', [TeamManagerController::class, 'verwijderen'])->name('teammanager.verwijderen');
+Route::put('/teammanager/aanpassen', [TeamManagerController::class, 'updateTeam'])->name('teammanager.updateTeam');
+

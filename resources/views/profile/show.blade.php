@@ -58,23 +58,6 @@
     </div>
     @endif
 
-    @if($speler->team && $speler->team->spelers->count())
-    <div class="mb-10">
-        <h2 class="text-3xl font-semibold text-blue-600 mb-6">Teamleden</h2>
-        <div class="bg-white p-8 rounded-lg shadow-md">
-            <ul class="divide-y divide-gray-200">
-                @foreach($speler->team->spelers as $lid)
-                    <li class="py-4">
-                        <p class="text-lg font-semibold">{{ $lid->voornaam }} {{ $lid->achternaam }}</p>
-                        <p class="text-gray-600 text-sm">{{ $lid->email }}</p>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-    @endif
-
-
     <div class="mb-10">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Notificaties</h2>
         <div class="bg-white p-8 rounded-lg shadow-md">

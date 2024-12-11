@@ -77,4 +77,13 @@ class SpelerController extends Controller
 
         return redirect()->route('spelers.index')->with('success', 'Speler succesvol verwijderd.');
     }
+
+    public function show($id)
+    {
+
+        $speler = Speler::with('acceptedTeams', 'teamEigenaar')->findOrFail($id);
+        return view('spelers.show', compact('speler'));
+        
+    }
+
 }

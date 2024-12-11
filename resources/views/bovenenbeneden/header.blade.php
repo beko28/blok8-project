@@ -23,6 +23,19 @@
                 <li><a href="{{ route('competities.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Poules</button></a></li>
                 <li><a href="{{ route('nieuws.index') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Nieuws</button></a></li>
                 <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Contact</button></a></li>
+
+                @auth
+                    @if(auth()->user()->role === 'eigenaar')
+                        <li>
+                            <a href="{{ route('teammanager.index') }}" class="flex items-center space-x-2 hover:underline hover:text-yellow-400 transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-300" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M11 17a1 1 0 102 0 1 1 0 00-2 0zm-4-7a2 2 0 11-4 0 2 2 0 014 0zm6-3a2 2 0 100 4 2 2 0 000-4zM5.657 4.343a2 2 0 010 2.828L4.828 8H3a1 1 0 000 2h1.828l.829.829a2 2 0 010 2.828L3 15v2a1 1 0 002 0v-1.172l.828-.829a2 2 0 012.828 0L10 18v1a1 1 0 002 0v-1l1.172-1.172a2 2 0 012.828 0L18 15.172V17a1 1 0 102 0v-2l-1.172-1.172a2 2 0 010-2.828l.829-.829H19a1 1 0 100-2h-1.172l-.829-.829a2 2 0 010-2.828L17 3V1a1 1 0 00-2 0v1.172l-1.172 1.172a2 2 0 01-2.828 0L10 2V1a1 1 0 10-2 0v1L6.343 4.343z" />
+                                </svg>
+                                <span><button>Teammanager</button></span>
+                            </a>
+                        </li>
+                    @endif
+                @endauth
             </ul>
 
             <div class="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
