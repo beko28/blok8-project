@@ -65,9 +65,9 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <a href="{{ route('spelers.show', $speler->id) }}"
-                                       class="bg-indigo-500 text-white px-3 py-1 rounded-full text-xs font-semibold hover:bg-indigo-600 transition">
-                                        Bekijk
+                                    <a href="{{ route('chat.show', $speler->email) }}"
+                                    class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold hover:bg-blue-600 transition">
+                                    Chat
                                     </a>
                                 </td>
                             </tr>

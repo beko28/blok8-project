@@ -25,6 +25,11 @@
                 <li><a href="{{ route('contact.show') }}" class="hover:underline hover:text-yellow-400 transition duration-300"><button>Contact</button></a></li>
 
                 @auth
+                <li>
+                    <a href="{{ route('chat.show', auth()->user()->email) }}" class="hover:underline hover:text-yellow-400 transition duration-300">
+                        <button>Chat</button>
+                    </a>
+                </li>
                     @if(auth()->user()->role === 'eigenaar')
                         <li>
                             <a href="{{ route('teammanager.index') }}" class="flex items-center space-x-2 hover:underline hover:text-yellow-400 transition duration-300">
@@ -35,6 +40,7 @@
                             </a>
                         </li>
                     @endif
+
                 @endauth
             </ul>
 

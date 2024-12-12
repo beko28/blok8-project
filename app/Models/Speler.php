@@ -69,4 +69,15 @@ class Speler extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function verstuurdeBerichten()
+    {
+        return $this->hasMany(Bericht::class, 'afzender_id');
+    }
+
+    public function ontvangenBerichten()
+    {
+        return $this->hasMany(Bericht::class, 'ontvanger_id');
+    }
+
 }

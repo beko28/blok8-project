@@ -7,6 +7,7 @@ use App\Models\Speler;
 use App\Models\Bericht;
 use App\Models\Aanvraag;
 use App\Models\Team;
+use App\Models\Nieuws;
 use App\Models\SpelersTeams;
 
 class ProfileController extends Controller
@@ -14,15 +15,13 @@ class ProfileController extends Controller
 
     public function show(Request $request)
     {
-        $spelerId = $request->session()->get('id');
-    
-        if (!$spelerId) {
+        if (!auth()->check()) {
             return redirect()->route('login')->withErrors('Je moet ingelogd zijn om je profiel te bekijken.');
         }
     
-        $speler = Speler::with('team', 'teamEigenaar')->findOrFail($spelerId);
+        $speler = Speler::with('team', 'teamEigenaar')->findOrFail(auth()->id());
     
-        $berichten = Bericht::where('ontvanger_id', $spelerId)->latest()->get();
+        $berichten = Bericht::where('ontvanger_id', auth()->id())->latest()->get();
     
         $aanvragen = collect();
         if ($speler->role === 'eigenaar' && $speler->teamEigenaar) {
@@ -35,6 +34,7 @@ class ProfileController extends Controller
     
         return view('profile.show', compact('speler', 'berichten', 'aanvragen', 'teams'));
     }
+    
     
     public function accepteerAanvraag(Request $request, $id)
     {
@@ -50,6 +50,14 @@ class ProfileController extends Controller
     
         $aanvraag->status = 'geaccepteerd';
         $aanvraag->save();
+
+        $nieuweSpeler = $aanvraag->speler;
+        $team = $aanvraag->team;
+
+        Nieuws::create([
+            'titel' => 'Nieuwe speler in team!',
+            'inhoud' => $nieuweSpeler->voornaam . ' ' . $nieuweSpeler->achternaam . ' heeft zich aangesloten bij team ' . $team->naam,
+        ]);
     
         return redirect()->route('profile.show')->with('success', 'Aanvraag succesvol geaccepteerd.');
     }

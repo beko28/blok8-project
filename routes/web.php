@@ -7,8 +7,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PouleController;
 use App\Http\Controllers\CompetitieController;
 use App\Http\Controllers\TeamManagerController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +19,6 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
@@ -85,4 +85,17 @@ Route::post('/teammanager/aanvraag/{pivotId}/accepteren', [TeamManagerController
 Route::post('/teammanager/aanvraag/{pivotId}/weigeren', [TeamManagerController::class, 'weigeren'])->name('teammanager.weigeren');
 Route::delete('/teammanager/speler/{pivotId}/verwijderen', [TeamManagerController::class, 'verwijderen'])->name('teammanager.verwijderen');
 Route::put('/teammanager/aanpassen', [TeamManagerController::class, 'updateTeam'])->name('teammanager.updateTeam');
+
+Route::get('/login', [\App\Http\Controllers\CustomLoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [\App\Http\Controllers\CustomLoginController::class, 'login']);
+Route::post('/logout', [\App\Http\Controllers\CustomLoginController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/chat/{ontvangerEmail}', [ChatController::class, 'index'])->name('chat.show');
+    Route::post('/chat/{ontvangerEmail}', [ChatController::class, 'store'])->name('chat.store');
+    Route::get('/chat/search', [ChatController::class, 'search'])->name('chat.search');
+});
+
+Route::get('/register/step/{step?}', [RegistrationController::class, 'showStep'])->name('register.step');
+Route::post('/register/step/{step}', [RegistrationController::class, 'processStep'])->name('register.processStep');
 
