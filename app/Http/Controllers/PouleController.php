@@ -87,7 +87,4 @@ public function index()
     return view('poules.index', compact('competities'));
 }
 
-
-
-
 }
