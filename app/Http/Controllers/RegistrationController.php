@@ -62,15 +62,13 @@ class RegistrationController extends Controller
 
         if ($step == 3) {
             if ($role === 'speler') {
-                Speler::create(session('registration'));
+                $registrationData = session('registration');
+                $registrationData['role'] = 'speler';
+                Speler::create($registrationData);
             } elseif ($role === 'eigenaar') {
-                $request->validate([
-                    'teamnaam' => 'required|string|max:255',
-                    'adres' => 'required|string|max:255',
-                    'max_spelers' => 'required|integer|min:1',
-                ]);
-        
-                $speler = Speler::create(session('registration'));
+                $registrationData = session('registration');
+                $registrationData['role'] = 'eigenaar';
+                $speler = Speler::create($registrationData);
         
                 Team::create([
                     'naam' => $request->teamnaam,
@@ -79,7 +77,7 @@ class RegistrationController extends Controller
                     'eigenaar_id' => $speler->id,
                 ]);
             }
-        
+            
             session()->forget('registration');
             return redirect()->route('home')->with('success', 'Registratie voltooid!');
         }

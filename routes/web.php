@@ -86,10 +86,6 @@ Route::post('/teammanager/aanvraag/{pivotId}/weigeren', [TeamManagerController::
 Route::delete('/teammanager/speler/{pivotId}/verwijderen', [TeamManagerController::class, 'verwijderen'])->name('teammanager.verwijderen');
 Route::put('/teammanager/aanpassen', [TeamManagerController::class, 'updateTeam'])->name('teammanager.updateTeam');
 
-Route::get('/login', [\App\Http\Controllers\CustomLoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [\App\Http\Controllers\CustomLoginController::class, 'login']);
-Route::post('/logout', [\App\Http\Controllers\CustomLoginController::class, 'logout'])->name('logout');
-
 Route::middleware('auth')->group(function () {
     Route::get('/chat/{ontvangerEmail}', [ChatController::class, 'index'])->name('chat.show');
     Route::post('/chat/{ontvangerEmail}', [ChatController::class, 'store'])->name('chat.store');
@@ -99,3 +95,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/register/step/{step?}', [RegistrationController::class, 'showStep'])->name('register.step');
 Route::post('/register/step/{step}', [RegistrationController::class, 'processStep'])->name('register.processStep');
 
+Auth::routes();
