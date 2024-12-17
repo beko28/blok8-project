@@ -96,3 +96,7 @@ Route::get('/register/step/{step?}', [RegistrationController::class, 'showStep']
 Route::post('/register/step/{step}', [RegistrationController::class, 'processStep'])->name('register.processStep');
 
 Auth::routes();
+
+Route::post('/poules/uitnodigen/{team_id}', [PouleController::class, 'uitnodigen'])->name('poules.uitnodigen');
+Route::post('/poules/uitnodiging/{uitnodiging}/accepteren', [PouleController::class, 'acceptUitnodiging'])->name('poule.acceptUitnodiging');
+Route::post('/poules/uitnodiging/{uitnodiging}/weigeren', [PouleController::class, 'weigerUitnodiging'])->name('poule.weigerUitnodiging');

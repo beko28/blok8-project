@@ -19,13 +19,68 @@ class PouleController extends Controller
     {
         $request->validate([
             'naam' => 'required|string|max:255',
+            'max_teams' => 'required|integer|min:1|max:50',
+            'competitie_id' => 'required|integer|exists:competities,id',
         ]);
-
+    
         Poule::create([
             'naam' => $request->naam,
+            'competitie_id' => $request->input('competitie_id'),
+            'max_teams' => $request->max_teams,
         ]);
+    
+        return redirect()->route('poules.index')->with('success', 'Nieuwe poule succesvol aangemaakt!');
+    }
 
-        return redirect()->route('poules.index')->with('success', 'Poule toegevoegd!');
+    public function uitnodigen(Request $request, $team_id)
+    {
+        $request->validate([
+            'poule_id' => 'required|exists:poules,id',
+        ]);
+    
+        $poule = Poule::findOrFail($request->poule_id);
+        $team = Team::findOrFail($team_id);
+    
+        if (auth()->user()->id !== $poule->eigenaar_id) {
+            return redirect()->back()->with('error', 'Je hebt geen rechten om teams uit te nodigen.');
+        }
+    
+        $existingInvitation = DB::table('team_uitnodigingen')
+            ->where('poule_id', $poule->id)
+            ->where('team_id', $team->id)
+            ->exists();
+    
+        if ($existingInvitation) {
+            return redirect()->back()->with('error', 'Dit team is al uitgenodigd voor deze poule.');
+        }
+    
+        DB::table('team_uitnodigingen')->insert([
+            'poule_id' => $poule->id,
+            'team_id' => $team->id,
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    
+        return redirect()->back()->with('success', 'Team is succesvol uitgenodigd!');
+    }
+
+    public function acceptUitnodiging($uitnodigingId)
+    {
+        DB::table('team_uitnodigingen')
+            ->where('id', $uitnodigingId)
+            ->update(['status' => 'geaccepteerd']);
+
+        return redirect()->back()->with('success', 'Uitnodiging geaccepteerd!');
+    }
+
+    public function weigerUitnodiging($uitnodigingId)
+    {
+        DB::table('team_uitnodigingen')
+            ->where('id', $uitnodigingId)
+            ->update(['status' => 'geweigerd']);
+
+        return redirect()->back()->with('success', 'Uitnodiging geweigerd.');
     }
 
     public function edit(Poule $poule)

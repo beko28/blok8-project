@@ -4,10 +4,20 @@
 <header class="sticky top-0 z-50 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 text-white py-8 shadow-md">
     <div class="container mx-auto flex items-center justify-between px-6">
         <div class="flex items-center space-x-4">
-            <img src="/images/logo.png" class="rounded-full" style="width: 50px; height: 50px;">
+            <img src="/images/logo.png" class="rounded-full hover-bounce" style="width: 50px; height: 50px;">
             <a href="/home">
-                <h1 class="text-4xl font-extrabold tracking-tight">Pro Football</h1>
+                <h1 class="text-4xl font-extrabold tracking-tight hover-bounce">Pro Football</h1>
             </a>
+        </div>
+
+        <div class="relative hidden lg:block">
+            <input type="text" placeholder="Zoek..." 
+                   class="bg-white text-gray-800 py-2 px-4 rounded-full shadow-lg w-64 focus:outline-none focus:ring focus:ring-blue-300">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M13 10a3 3 0 11-6 0 3 3 0 016 0zm2 0a5 5 0 11-10 0 5 5 0 0110 0zm-1.707 5.707a1 1 0 010-1.414l2.586-2.586a1 1 0 011.414 0l2.586 2.586a1 1 0 010 1.414l-2.586 2.586a1 1 0 01-1.414 0L13.293 15.707a1 1 0 010-1.414l2.586-2.586a1 1 0 011.414 0l2.586 2.586a1 1 0 010 1.414l-2.586 2.586a1 1 0 01-1.414 0l-2.586-2.586z" clip-rule="evenodd" />
+                </svg>
+            </button>
         </div>
 
         <button id="menuToggle" class="lg:hidden focus:outline-none">
@@ -77,8 +87,20 @@
 <script>
     const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById('menu');
+    const darkModeToggle = document.getElementById('darkModeToggle');
 
     menuToggle.addEventListener('click', () => {
         menu.classList.toggle('hidden');
     });
+
+    darkModeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+    });
 </script>
+
+<style>
+  .hover-bounce:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+  }
+</style>

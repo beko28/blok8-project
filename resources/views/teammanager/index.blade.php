@@ -109,6 +109,46 @@
         @endif
     </div>
 
+    <!-- Uitnodigingen voor dit team -->
+<div class="bg-white p-8 rounded-lg shadow-md mb-10">
+    <div class="flex items-center mb-6 space-x-3">
+        <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m0 6v-8"></path>
+        </svg>
+        <h2 class="text-2xl font-bold text-gray-800">Uitnodigingen voor Poules</h2>
+    </div>
+
+    @if($uitnodigingen->isEmpty())
+        <p class="text-gray-500 italic">Geen uitnodigingen voor dit team op dit moment.</p>
+    @else
+        <ul class="divide-y divide-gray-200">
+            @foreach($uitnodigingen as $uitnodiging)
+                <li class="flex items-center justify-between py-4">
+                    <div>
+                        <span class="font-semibold text-gray-800">Poule:</span> 
+                        <span class="text-blue-600">{{ $uitnodiging->poule_naam }}</span>
+                        <span class="ml-2 text-gray-500">(Status: {{ ucfirst($uitnodiging->status) }})</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <form method="POST" action="{{ route('poule.acceptUitnodiging', $uitnodiging->id) }}">
+                            @csrf
+                            <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition">
+                                Accepteren
+                            </button>
+                        </form>
+                        <form method="POST" action="{{ route('poule.weigerUitnodiging', $uitnodiging->id) }}">
+                            @csrf
+                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+                                Weigeren
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+</div>
+
     <!-- Uitnodigen Speler -->
     <div class="bg-white p-8 rounded-lg shadow-md mb-10">
         <div class="flex items-center mb-6 space-x-3">

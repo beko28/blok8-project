@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\Nieuws;
+use App\Models\Poule;
 use App\Models\Speler;
 use App\Models\SpelersTeams;
 use Illuminate\Http\Request;
@@ -21,10 +22,14 @@ class TeamController extends Controller
         $query->where('naam', 'like', '%' . $search . '%');
     }
 
+    $poules = Poule::all();
+
     $teams = $query->get();
     
-        return view('teams.index', compact('teams'));
-    }
+    return view('teams.index', [
+        'teams' => $teams,
+        'poules' => $poules,
+    ]);    }
 
     public function show($id)
 {

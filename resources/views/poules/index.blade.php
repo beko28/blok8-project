@@ -3,6 +3,14 @@
 <div class="container mx-auto mt-10 px-4">
     <h1 class="text-4xl font-bold mb-10 text-gray-900 text-center">Competities</h1>
 
+    @if(auth()->check() && auth()->user()->role === 'eigenaar')
+    <div class="text-right mb-4">
+            <button id="openModal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Start een nieuwe poule
+            </button>
+        </div>
+    @endif
+
     @if(session('success'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded mb-6 shadow">
             {{ session('success') }}
@@ -54,5 +62,54 @@
         </div>
     @endforeach
 </div>
+
+<!-- Modal Background -->
+<div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
+        <div class="p-4 border-b">
+            <h2 class="text-xl font-semibold text-gray-700">Nieuwe Poule Aanmaken</h2>
+        </div>
+        <div class="p-4">
+            <!-- Formulier -->
+            <form action="{{ route('poules.store') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="naam" class="block text-gray-600 font-semibold mb-2">Naam Poule</label>
+                    <input type="text" name="naam" id="naam" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                </div>
+                <div class="mb-4">
+                    <label for="max_teams" class="block text-gray-600 font-semibold mb-2">Max aantal teams</label>
+                    <input type="number" name="max_teams" id="max_teams" min="1" max="50" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                </div>
+                <div class="flex justify-end space-x-2">
+                <input type="hidden" name="competitie_id" value="{{ $competitie->id }}">
+                    <button type="button" id="closeModal" class="text-gray-600 hover:text-gray-800 font-bold py-2 px-4">Annuleren</button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Opslaan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('modal');
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+
+    openModal.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>
+
 
 @include('bovenenbeneden.footer')

@@ -29,5 +29,4 @@ class Team extends Model
         return $this->belongsToMany(Poule::class, 'team_poules');
     }
 
-
 }

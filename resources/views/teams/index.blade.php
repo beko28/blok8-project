@@ -56,6 +56,14 @@
                                 @else
                                     <span class="text-gray-400 text-sm italic">Alleen spelers kunnen zich aanmelden.</span>
                                 @endif
+                                @if(auth()->check() && auth()->user()->role === 'speler')
+                                    <form method="POST" action="{{ route('poules.uitnodigen', ['team_id' => $team->id]) }}">
+                                        @csrf
+                                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                                            Uitnodigen
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

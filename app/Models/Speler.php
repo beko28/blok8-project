@@ -75,4 +75,16 @@ class Speler extends Authenticatable
         return $this->hasMany(Bericht::class, 'ontvanger_id');
     }
 
+    public function isPouleEigenaar()
+    {
+        return $this->teams()->exists();
+    }
+
+    public function isEigenaar()
+    {
+        return $this->role === self::ROLE_TEAMEIGENAAR;
+    }
+    
+
+
 }
