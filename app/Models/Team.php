@@ -30,10 +30,6 @@ class Team extends Model
     {
         return $this->belongsTo(Poule::class);
     }
-
-    public function poules()
-    {
-        return $this->belongsToMany(Poule::class, 'poule_team');
-    }
+    
 
 }

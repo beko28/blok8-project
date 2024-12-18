@@ -11,7 +11,7 @@ class Poule extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(Team::class, 'poule_team');
+        return $this->hasMany(Team::class, 'poule_id');
     }
 
     public function competitie()
