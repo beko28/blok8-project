@@ -1,4 +1,4 @@
-@extends('layout')
+@include('bovenenbeneden.header')
 
 @section('content')
 <div class="container mx-auto mt-10 px-4">
@@ -26,3 +26,5 @@
     </div>
 </div>
 @endsection
+
+@include('bovenenbeneden.footer')

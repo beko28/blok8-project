@@ -40,7 +40,7 @@
                                         <label for="team_id" class="block text-sm font-semibold text-gray-700">Team toevoegen</label>
                                         <select name="team_id" id="team_id" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
                                             <option value="" disabled selected>Kies een team</option>
-                                            @foreach($beschikbareTeams as $team)
+                                            @foreach($alleTeams as $team)
                                                 <option value="{{ $team->id }}">{{ $team->naam }}</option>
                                             @endforeach
                                         </select>

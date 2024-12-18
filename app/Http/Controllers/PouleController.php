@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Poule; // Correcte import van het model
-use App\Models\Team; // Correcte import van het model
-use App\Models\Competitie; // Correcte import van het model
+use App\Models\Poule;
+use App\Models\Team;
+use App\Models\Competitie;
 
 class PouleController extends Controller
 {
@@ -105,10 +105,11 @@ public function verwijderTeam(Poule $poule, Team $team)
     if ($team->poule_id !== $poule->id) {
         return redirect()->back()->with('error', 'Team hoort niet bij deze poule.');
     }
+    
 
     $team->update(['poule_id' => null]);
 
-    return redirect()->route('poules.show', $poule->id)->with('success', 'Team succesvol verwijderd uit de poule.');
+    return redirect()->route('poules.index', $poule->id)->with('success', 'Team succesvol verwijderd uit de poule.');
 }
 
 
@@ -118,11 +119,10 @@ public function index()
         $query->select('id', 'naam');
     }])->get();
 
-    // Ensure this line is present and the variable name matches
     $beschikbareTeams = Team::whereNull('poule_id')->get();
+    $alleTeams = Team::all();
 
-    // Make sure to pass $beschikbareTeams to the view
-    return view('poules.index', compact('competities', 'beschikbareTeams'));
+    return view('poules.index', compact('competities', 'beschikbareTeams', 'alleTeams'));
 }
 
 }
