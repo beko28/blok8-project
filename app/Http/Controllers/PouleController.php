@@ -32,56 +32,20 @@ class PouleController extends Controller
         return redirect()->route('poules.index')->with('success', 'Nieuwe poule succesvol aangemaakt!');
     }
 
-    public function uitnodigen(Request $request, $team_id)
+    public function voegTeamToe(Request $request, Poule $poule)
     {
         $request->validate([
-            'poule_id' => 'required|exists:poules,id',
+            'team_id' => 'required|exists:teams,id',
         ]);
     
-        $poule = Poule::findOrFail($request->poule_id);
-        $team = Team::findOrFail($team_id);
+        $team = Team::findOrFail($request->team_id);
     
-        if (auth()->user()->id !== $poule->eigenaar_id) {
-            return redirect()->back()->with('error', 'Je hebt geen rechten om teams uit te nodigen.');
-        }
+        $team->poule_id = $poule->id;
+        $team->save();
     
-        $existingInvitation = DB::table('team_uitnodigingen')
-            ->where('poule_id', $poule->id)
-            ->where('team_id', $team->id)
-            ->exists();
-    
-        if ($existingInvitation) {
-            return redirect()->back()->with('error', 'Dit team is al uitgenodigd voor deze poule.');
-        }
-    
-        DB::table('team_uitnodigingen')->insert([
-            'poule_id' => $poule->id,
-            'team_id' => $team->id,
-            'status' => 'pending',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-    
-        return redirect()->back()->with('success', 'Team is succesvol uitgenodigd!');
+        return redirect()->route('poules.index', $poule->id)->with('success', 'Team succesvol toegevoegd aan de poule.');
     }
 
-    public function acceptUitnodiging($uitnodigingId)
-    {
-        DB::table('team_uitnodigingen')
-            ->where('id', $uitnodigingId)
-            ->update(['status' => 'geaccepteerd']);
-
-        return redirect()->back()->with('success', 'Uitnodiging geaccepteerd!');
-    }
-
-    public function weigerUitnodiging($uitnodigingId)
-    {
-        DB::table('team_uitnodigingen')
-            ->where('id', $uitnodigingId)
-            ->update(['status' => 'geweigerd']);
-
-        return redirect()->back()->with('success', 'Uitnodiging geweigerd.');
-    }
 
     public function edit(Poule $poule)
     {
@@ -130,8 +94,23 @@ class PouleController extends Controller
 
 public function show(Poule $poule)
 {
-    return view('poules.show', compact('poule'));
+    $beschikbareTeams = Team::whereNull('poule_id')->get();
+
+    return view('poules.show', compact('poule', 'beschikbareTeams'));
 }
+
+
+public function verwijderTeam(Poule $poule, Team $team)
+{
+    if ($team->poule_id !== $poule->id) {
+        return redirect()->back()->with('error', 'Team hoort niet bij deze poule.');
+    }
+
+    $team->update(['poule_id' => null]);
+
+    return redirect()->route('poules.show', $poule->id)->with('success', 'Team succesvol verwijderd uit de poule.');
+}
+
 
 public function index()
 {
@@ -139,7 +118,11 @@ public function index()
         $query->select('id', 'naam');
     }])->get();
 
-    return view('poules.index', compact('competities'));
+    // Ensure this line is present and the variable name matches
+    $beschikbareTeams = Team::whereNull('poule_id')->get();
+
+    // Make sure to pass $beschikbareTeams to the view
+    return view('poules.index', compact('competities', 'beschikbareTeams'));
 }
 
 }

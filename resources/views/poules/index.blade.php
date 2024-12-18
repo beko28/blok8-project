@@ -31,22 +31,44 @@
                             <h3 class="bg-gray-200 text-gray-700 font-semibold text-lg px-4 py-2 rounded-t-lg border-b border-gray-300">
                                 {{ $poule->naam }}
                             </h3>
-                            
+
+                            <!-- Team toevoegen formulier -->
+                            <div class="p-4">
+                                <form action="{{ route('poules.voegTeamToe', $poule->id) }}" method="POST" class="mb-4">
+                                    @csrf
+                                    <div class="mb-2">
+                                        <label for="team_id" class="block text-sm font-semibold text-gray-700">Team toevoegen</label>
+                                        <select name="team_id" id="team_id" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                            <option value="" disabled selected>Kies een team</option>
+                                            @foreach($beschikbareTeams as $team)
+                                                <option value="{{ $team->id }}">{{ $team->naam }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Toevoegen</button>
+                                </form>
+                            </div>
+
                             <table class="table-auto w-full text-sm">
                                 <thead class="bg-gray-100">
                                     <tr>
                                         <th class="px-4 py-2 text-left font-medium text-gray-600">Team</th>
                                         <th class="px-4 py-2 text-center font-medium text-gray-600">Positie</th>
+                                        <th class="px-4 py-2 text-center font-medium text-gray-600">Acties</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($poule->teams as $index => $team)
-                                        <tr class="border-t hover:bg-gray-50 
-                                            @if($team->eigenaar && $team->eigenaar->id == Auth::id())
-                                                bg-yellow-200 font-bold
-                                            @endif">
+                                        <tr class="border-t hover:bg-gray-50">
                                             <td class="px-4 py-2 text-gray-800">{{ $team->naam }}</td>
                                             <td class="px-4 py-2 text-center text-gray-800">{{ $index + 1 }}</td>
+                                            <td class="px-4 py-2 text-center">
+                                                <form action="{{ route('poules.verwijderTeam', [$poule->id, $team->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -82,7 +104,6 @@
                     <input type="number" name="max_teams" id="max_teams" min="1" max="50" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                 </div>
                 <div class="flex justify-end space-x-2">
-                <input type="hidden" name="competitie_id" value="{{ $competitie->id }}">
                     <button type="button" id="closeModal" class="text-gray-600 hover:text-gray-800 font-bold py-2 px-4">Annuleren</button>
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Opslaan</button>
                 </div>
@@ -110,6 +131,5 @@
         }
     });
 </script>
-
 
 @include('bovenenbeneden.footer')

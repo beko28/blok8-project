@@ -8,6 +8,7 @@ class Team extends Model
 {
     protected $fillable = [
         'naam',
+        'poule_id',
         'adres',
         'max_spelers',
         'eigenaar_id',
@@ -24,6 +25,7 @@ class Team extends Model
             ->withPivot('id', 'status')
             ->withTimestamps();
     }
+    
     public function poules()
     {
         return $this->belongsToMany(Poule::class, 'team_poules');

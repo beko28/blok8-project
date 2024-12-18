@@ -100,3 +100,6 @@ Auth::routes();
 Route::post('/poules/uitnodigen/{team_id}', [PouleController::class, 'uitnodigen'])->name('poules.uitnodigen');
 Route::post('/poules/uitnodiging/{uitnodiging}/accepteren', [PouleController::class, 'acceptUitnodiging'])->name('poule.acceptUitnodiging');
 Route::post('/poules/uitnodiging/{uitnodiging}/weigeren', [PouleController::class, 'weigerUitnodiging'])->name('poule.weigerUitnodiging');
+
+Route::post('/poules/{poule}/voegTeamToe', [PouleController::class, 'voegTeamToe'])->name('poules.voegTeamToe');
+Route::delete('/poules/{poule}/verwijderTeam/{team}', [PouleController::class, 'verwijderTeam'])->name('poules.verwijderTeam');
