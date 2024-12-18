@@ -11,14 +11,17 @@
         </div>
 
         <div class="relative hidden lg:block">
-            <input type="text" placeholder="Zoek..." 
-                   class="bg-white text-gray-800 py-2 px-4 rounded-full shadow-lg w-64 focus:outline-none focus:ring focus:ring-blue-300">
-            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M13 10a3 3 0 11-6 0 3 3 0 016 0zm2 0a5 5 0 11-10 0 5 5 0 0110 0zm-1.707 5.707a1 1 0 010-1.414l2.586-2.586a1 1 0 011.414 0l2.586 2.586a1 1 0 010 1.414l-2.586 2.586a1 1 0 01-1.414 0L13.293 15.707a1 1 0 010-1.414l2.586-2.586a1 1 0 011.414 0l2.586 2.586a1 1 0 010 1.414l-2.586 2.586a1 1 0 01-1.414 0l-2.586-2.586z" clip-rule="evenodd" />
-                </svg>
-            </button>
+            <form action="{{ route('search.index') }}" method="GET" class="relative">
+                <input type="text" name="search" placeholder="Zoek naar spelers of teams..." 
+                    class="bg-white text-gray-800 py-2 px-4 rounded-full shadow-lg w-64 focus:outline-none focus:ring focus:ring-blue-300">
+                <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a7 7 0 100 14 7 7 0 000-14zM9 7a1 1 0 112 0v2a1 1 0 01-2 0V7zM9 11a1 1 0 112 0 1 1 0 01-2 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </form>
         </div>
+
 
         <button id="menuToggle" class="lg:hidden focus:outline-none">
             <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -4,20 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Speler;
+use App\Models\Team;
 
 class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Speler::with('team');
-    
+        $spelersQuery = Speler::query();
+        $teamsQuery = Team::query();
+
         if ($request->has('search') && $request->search) {
-            $query->where('voornaam', 'like', '%' . $request->search . '%')
-                  ->orWhere('achternaam', 'like', '%' . $request->search . '%');
+            $searchTerm = $request->search;
+
+            $spelersQuery->where('voornaam', 'like', '%' . $searchTerm . '%')
+                         ->orWhere('achternaam', 'like', '%' . $searchTerm . '%');
+
+            $teamsQuery->where('naam', 'like', '%' . $searchTerm . '%');
         }
-    
-        $spelers = $query->get();
-    
-        return view('spelers.index', compact('spelers'));
+
+        $spelers = $spelersQuery->get();
+        $teams = $teamsQuery->get();
+
+        return view('zoekresultaten.index', compact('spelers', 'teams'));
     }
 }

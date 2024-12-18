@@ -10,6 +10,7 @@ use App\Http\Controllers\TeamManagerController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\NieuwsController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -103,3 +104,5 @@ Route::post('/poules/uitnodiging/{uitnodiging}/weigeren', [PouleController::clas
 
 Route::post('/poules/{poule}/voegTeamToe', [PouleController::class, 'voegTeamToe'])->name('poules.voegTeamToe');
 Route::delete('/poules/{poule}/verwijderTeam/{team}', [PouleController::class, 'verwijderTeam'])->name('poules.verwijderTeam');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');

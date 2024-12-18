@@ -53,15 +53,13 @@
                                 <thead class="bg-gray-100">
                                     <tr>
                                         <th class="px-4 py-2 text-left font-medium text-gray-600">Team</th>
-                                        <th class="px-4 py-2 text-center font-medium text-gray-600">Positie</th>
                                         <th class="px-4 py-2 text-center font-medium text-gray-600">Acties</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($poule->teams as $index => $team)
+                                    @foreach($poule->teams as $team)
                                         <tr class="border-t hover:bg-gray-50">
                                             <td class="px-4 py-2 text-gray-800">{{ $team->naam }}</td>
-                                            <td class="px-4 py-2 text-center text-gray-800">{{ $index + 1 }}</td>
                                             <td class="px-4 py-2 text-center">
                                                 <form action="{{ route('poules.verwijderTeam', [$poule->id, $team->id]) }}" method="POST">
                                                     @csrf

@@ -40,12 +40,14 @@ class PouleController extends Controller
     
         $team = Team::findOrFail($request->team_id);
     
-        $team->poule_id = $poule->id;
-        $team->save();
+        if ($poule->teams()->where('team_id', $team->id)->exists()) {
+            return redirect()->route('poules.index')->with('error', 'Dit team is al toegevoegd aan deze poule.');
+        }
     
-        return redirect()->route('poules.index', $poule->id)->with('success', 'Team succesvol toegevoegd aan de poule.');
+        $poule->teams()->attach($team->id);
+    
+        return redirect()->route('poules.index')->with('success', 'Team succesvol toegevoegd aan de poule.');
     }
-
 
     public function edit(Poule $poule)
     {
@@ -102,16 +104,14 @@ public function show(Poule $poule)
 
 public function verwijderTeam(Poule $poule, Team $team)
 {
-    if ($team->poule_id !== $poule->id) {
-        return redirect()->back()->with('error', 'Team hoort niet bij deze poule.');
+    if (!$poule->teams()->where('team_id', $team->id)->exists()) {
+        return redirect()->back()->with('error', 'Dit team behoort niet tot deze poule.');
     }
-    
 
-    $team->update(['poule_id' => null]);
+    $poule->teams()->detach($team->id);
 
-    return redirect()->route('poules.index', $poule->id)->with('success', 'Team succesvol verwijderd uit de poule.');
+    return redirect()->route('poules.index')->with('success', 'Team succesvol verwijderd uit de poule.');
 }
-
 
 public function index()
 {

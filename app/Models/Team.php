@@ -26,10 +26,11 @@ class Team extends Model
             ->withTimestamps();
     }
     
-    public function poule()
+    public function poules()
     {
-        return $this->belongsTo(Poule::class);
+        return $this->belongsToMany(Poule::class, 'poule_team')->withTimestamps();
     }
+    
     
 
 }
