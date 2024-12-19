@@ -32,7 +32,8 @@
                                 {{ $poule->naam }}
                             </h3>
 
-                            <!-- Team toevoegen formulier -->
+                            @if(auth()->check() && auth()->user()->role === 'eigenaar')
+
                             <div class="p-4">
                                 <form action="{{ route('poules.voegTeamToe', $poule->id) }}" method="POST" class="mb-4">
                                     @csrf
@@ -71,7 +72,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
+                            @endif
                             <div class="bg-gray-200 text-gray-700 text-sm font-semibold py-2 px-4 rounded-b-lg">
                                 {{ $poule->teams->count() }} teams
                             </div>
@@ -83,14 +84,12 @@
     @endforeach
 </div>
 
-<!-- Modal Background -->
 <div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
         <div class="p-4 border-b">
             <h2 class="text-xl font-semibold text-gray-700">Nieuwe Poule Aanmaken</h2>
         </div>
         <div class="p-4">
-            <!-- Formulier -->
             <form action="{{ route('poules.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
